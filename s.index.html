@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hazırlık Telafi Sınavı - Listening & Note-Taking Practice</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex flex-wrap justify-between items-center gap-4">
+      <div class="flex items-center space-x-3">
+        <div class="p-2.5 bg-indigo-600 rounded-xl text-white shadow-lg shadow-indigo-500/20">
+          <i class="fa-solid fa-headphones-simple text-xl"></i>
+        </div>
+        <div>
+          <h1 class="text-lg font-bold text-white leading-tight">Listening Proficiency Simulator</h1>
+          <p class="text-xs text-slate-400">English Prep Makeup Exam Practice (Telafi Sınavı Hazırlık)</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-xs font-semibold px-3 py-1.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
+          <i class="fa-solid fa-bullseye text-indigo-400 mr-1.5"></i> Passing Grade: 60 / 100
+        </span>
+        <button onclick="resetExam()" class="text-xs px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">
+          <i class="fa-solid fa-rotate-right mr-1"></i> Reset
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="max-w-7xl mx-auto px-4 py-6 flex-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+    <!-- Left Column: Audio Controls & Note-taking Sheet (5 cols) -->
+    <div class="lg:col-span-5 flex flex-col gap-6">
+
+      <!-- Audio / Lecture Card -->
+      <div class="bg-slate-800/80 border border-slate-700/60 rounded-2xl p-5 shadow-xl backdrop-blur">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="font-semibold text-slate-200 flex items-center gap-2">
+            <i class="fa-solid fa-volume-high text-indigo-400"></i>
+            Lecture Audio & Player
+          </h2>
+          <span class="text-xs font-mono text-indigo-300 bg-indigo-950/60 border border-indigo-800/50 px-2.5 py-1 rounded-md">
+            Topic: Leadership Styles
+          </span>
+        </div>
+
+        <!-- Audio Player Controls -->
+        <div class="bg-slate-900/90 rounded-xl p-4 border border-slate-700/50 flex flex-col gap-4">
+          <div class="flex items-center justify-between text-xs text-slate-400">
+            <span>Audio Mode: <strong class="text-slate-200">Text-to-Speech Lecture</strong></span>
+            <span id="speechStatus" class="text-emerald-400 flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Ready
+            </span>
+          </div>
+
+          <div class="flex items-center justify-center gap-3 py-2">
+            <button id="playBtn" onclick="toggleAudio()" class="w-12 h-12 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white flex items-center justify-center shadow-lg shadow-indigo-600/30 transition-all hover:scale-105 active:scale-95">
+              <i id="playIcon" class="fa-solid fa-play text-lg ml-0.5"></i>
+            </button>
+            <button onclick="stopAudio()" class="w-10 h-10 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center border border-slate-700 transition">
+              <i class="fa-solid fa-stop text-sm"></i>
+            </button>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 pt-2 border-t border-slate-800 text-xs">
+            <div>
+              <label class="block text-slate-400 mb-1">Speed Rate:</label>
+              <select id="speedSelect" onchange="changeSpeed()" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-200 focus:outline-none focus:border-indigo-500">
+                <option value="0.85">0.85x (Slower)</option>
+                <option value="0.95" selected>0.95x (Exam Pace)</option>
+                <option value="1.0">1.0x (Normal)</option>
+                <option value="1.1">1.1x (Faster)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-slate-400 mb-1">Transcript View:</label>
+              <button onclick="toggleTranscriptModal()" class="w-full bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-300 transition flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-file-lines text-indigo-400"></i> Read Text
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-xs text-slate-400 mt-3 leading-relaxed">
+          <i class="fa-solid fa-info-circle text-indigo-400 mr-1"></i>
+          <strong>Exam Rule:</strong> Listen to the lecture once or twice while taking notes below. Do not look at the questions until you finish listening!
+        </p>
+      </div>
+
+      <!-- Note-Taking Sheet (Digital Scratchpad) -->
+      <div class="bg-slate-800/80 border border-slate-700/60 rounded-2xl p-5 shadow-xl flex-1 flex flex-col min-h-[380px]">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="font-semibold text-slate-200 flex items-center gap-2">
+            <i class="fa-solid fa-pen-to-square text-indigo-400"></i>
+            My Note-Taking Sheet
+          </h2>
+          <span class="text-xs text-slate-400">Auto-saved locally</span>
+        </div>
+        <textarea id="userNotes" placeholder="Take your lecture notes here...
+Suggestions:
+- Main topic & 4 types
+- Characteristics & features
+- Pros / Benefits
+- Cons / Drawbacks
+- Suitable employees or environments" 
+          class="w-full flex-1 bg-slate-900/90 border border-slate-700/70 rounded-xl p-4 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 font-mono leading-relaxed custom-scrollbar resize-none"></textarea>
+      </div>
+
+    </div>
+
+    <!-- Right Column: Exam Questions Area (7 cols) -->
+    <div class="lg:col-span-7 flex flex-col gap-6">
+
+      <!-- Exam Header / Progress -->
+      <div class="bg-slate-800/80 border border-slate-700/60 rounded-2xl p-5 shadow-xl flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h2 class="text-lg font-bold text-slate-100">Part 1 & 2: Note-Taking Comprehension Questions</h2>
+          <p class="text-xs text-slate-400 mt-0.5">Answer the 10 questions using the notes you took during the lecture.</p>
+        </div>
+        <div id="scoreBadge" class="hidden text-right">
+          <span id="scoreText" class="text-2xl font-black text-indigo-400">0 / 100</span>
+          <p id="passFailText" class="text-xs font-semibold uppercase tracking-wider mt-0.5"></p>
+        </div>
+      </div>
+
+      <!-- Questions Container -->
+      <div id="questionsContainer" class="flex flex-col gap-5">
+        <!-- Questions rendered dynamically via JS -->
+      </div>
+
+      <!-- Submit Button & Feedback -->
+      <div class="bg-slate-800/80 border border-slate-700/60 rounded-2xl p-5 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-xs text-slate-400">
+          Make sure to select an answer for all 10 questions before submitting.
+        </p>
+        <button id="submitBtn" onclick="gradeExam()" class="w-full sm:w-auto px-8 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-semibold text-sm shadow-lg shadow-indigo-600/30 transition-all hover:scale-105 active:scale-95">
+          Submit Exam & Calculate Score
+        </button>
+      </div>
+
+      <!-- Exam Strategy Tips Card -->
+      <div class="bg-indigo-950/40 border border-indigo-800/40 rounded-2xl p-5 shadow-lg">
+        <h3 class="text-sm font-bold text-indigo-300 flex items-center gap-2 mb-2">
+          <i class="fa-solid fa-lightbulb text-amber-400"></i>
+          Telafi Sınavında 56 -> 70+ Çıkarma Taktikleri
+        </h3>
+        <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside leading-relaxed">
+          <li><strong>Kategori ve Başlık Düzeni:</strong> Dinleme sırasında her tipi (örn. Type 1, Type 2, Type 3, Type 4) kağıdınızda ayrı bir başlık olarak yazın.</li>
+          <li><strong>Zıtlık & Karşılaştırma Kelimelerine Dikkat:</strong> <em>"On the other hand", "However", "In contrast", "Whereas"</em> gibi bağlaçlar doğrudan soru cevabıdır!</li>
+          <li><strong>Avantaj / Dezavantaj İkilisi:</strong> Sınavlardaki soruların %60'ı her tipin <em>Pros (Benefits)</em> ve <em>Cons (Drawbacks)</em> kısımlarından gelir. Not alırken <code>+</code> ve <code>-</code> sembolleri kullanın.</li>
+          <li><strong>Uygun Kişilik / Ortam:</strong> Konuşmacının "This suits people who..." dediği yeri kaçırmayın; sınav sorularının vazgeçilmezidir.</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Transcript Modal -->
+  <div id="transcriptModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl">
+      <div class="p-4 border-b border-slate-800 flex items-center justify-between">
+        <h3 class="font-bold text-slate-200 flex items-center gap-2">
+          <i class="fa-solid fa-file-text text-indigo-400"></i> Full Lecture Transcript
+        </h3>
+        <button onclick="toggleTranscriptModal()" class="text-slate-400 hover:text-white p-1">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+      <div class="p-6 overflow-y-auto custom-scrollbar text-sm text-slate-300 space-y-4 font-sans leading-relaxed" id="transcriptContent">
+        <!-- Transcript inserted by JS -->
+      </div>
+      <div class="p-4 border-t border-slate-800 text-right">
+        <button onclick="toggleTranscriptModal()" class="px-5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-semibold">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Audio Lecture Transcript Data
+    const lectureText = `Good morning, everyone. 
+
+Whether you plan to enter corporate business, engineering, or public administration, every organization you join will operate under a specific style of management. Today, we will examine four major leadership styles commonly found in modern organizations.
+
+The first style is known as the Autocratic Leadership style. In this structure, authority and decision-making power are centralized in a single leader or a very small group at the top. There are strict rules, rigid hierarchies, and limited input from lower-level employees. Communication flows strictly downwards. Now, what are the benefits of this style? The primary advantage is speed. Because decision-making does not require group consensus, autocratic organizations can react extremely fast during crisis situations or emergencies. However, on the negative side, autocratic leadership often leads to low employee morale, stifles individual creativity, and results in high staff turnover. This style is best suited for high-pressure environments like emergency response teams, military units, or turnaround projects with tight deadlines.
+
+The second style is Democratic or Participative Leadership. Unlike the autocratic model, democratic leaders encourage team members to participate actively in decision-making and problem-solving, although the leader retains the final approval. Communication in this culture is open and two-way, often taking place in collaborative meetings. One major benefit is that employees feel valued and motivated, which boosts job satisfaction and leads to higher innovation. On the other hand, the key drawback of democratic leadership is that decision-making can be very slow and time-consuming. Furthermore, conflicts may arise if team members disagree strongly on a strategy. This style is particularly effective in research and development departments, creative agencies, and highly skilled teams.
+
+Moving on to the third style, we have Laissez-Faire Leadership, derived from the French phrase meaning 'let it be'. In a laissez-faire culture, leaders adopt a hands-off approach. They delegate tasks and provide necessary resources, but grant maximum autonomy to employees to manage their own time and workload without daily supervision. The main advantage is that it offers ultimate freedom, fostering high job satisfaction among self-motivated experts. However, the major disadvantage is a potential lack of direction and accountability. If team members lack experience, self-discipline, or clarity, projects can quickly become chaotic and fail to meet deadlines. Therefore, laissez-faire leadership suits senior research laboratories, elite technology startups, or teams composed of experienced specialists.
+
+Finally, the fourth category is Transformational Leadership. Transformational leaders focus on inspiring and motivating employees through a shared long-term vision rather than relying on strict rules or total independence. These leaders act as mentors, encouraging continuous learning, innovation, and organizational change. The principal benefit of transformational leadership is high employee engagement and strong adaptability to market changes. Nevertheless, the main limitation is the risk of burnout. Because transformational leaders push for constant improvement and high goals, employees may feel overwhelmed. Additionally, daily routine operations might be overlooked while focusing too much on grand strategic visions. This style is ideal for fast-growing companies and organizations undergoing major structural transitions.
+
+Now, you have time to review your notes and answer the questions on your sheet.`;
+
+    // Exam Questions
+    const questionsData = [
+      {
+        id: 1,
+        question: "1. What is the main purpose of the lecture?",
+        options: [
+          { text: "To contrast business culture with academic study methods.", isCorrect: false },
+          { text: "To analyze four distinct types of leadership styles in organizations.", isCorrect: true },
+          { text: "To explain why autocratic leadership is superior to democratic models.", isCorrect: false },
+          { text: "To outline the financial benefits of employee training programs.", isCorrect: false }
+        ],
+        rationale: "The speaker explicitly states: 'Today, we will examine four major leadership styles commonly found in modern organizations.'"
+      },
+      {
+        id: 2,
+        question: "2. According to the lecturer, what is the primary advantage of Autocratic Leadership?",
+        options: [
+          { text: "High job satisfaction among junior staff.", isCorrect: false },
+          { text: "Rapid decision-making in critical situations.", isCorrect: true },
+          { text: "Fostering long-term creative thinking.", isCorrect: false },
+          { text: "Reduced turnover rates across departments.", isCorrect: false }
+        ],
+        rationale: "The primary advantage mentioned is speed, allowing the organization to react extremely fast during crisis situations."
+      },
+      {
+        id: 3,
+        question: "3. Which environment is described as MOST suitable for Autocratic Leadership?",
+        options: [
+          { text: "Creative advertising agencies.", isCorrect: false },
+          { text: "High-level technology startups.", isCorrect: false },
+          { text: "Emergency response units or military teams.", isCorrect: true },
+          { text: "Research and development laboratories.", isCorrect: false }
+        ],
+        rationale: "The speaker mentions it is best suited for 'high-pressure environments like emergency response teams, military units, or turnaround projects'."
+      },
+      {
+        id: 4,
+        question: "4. What is a key disadvantage of Democratic (Participative) Leadership?",
+        options: [
+          { text: "Low employee motivation and high dissatisfaction.", isCorrect: false },
+          { text: "A complete lack of two-way communication.", isCorrect: false },
+          { text: "Slow and time-consuming decision-making processes.", isCorrect: true },
+          { text: "Excessive supervision from senior managers.", isCorrect: false }
+        ],
+        rationale: "The lecture notes that 'the key drawback of democratic leadership is that decision-making can be very slow and time-consuming.'"
+      },
+      {
+        id: 5,
+        question: "5. In a Laissez-Faire leadership culture, leaders typically:",
+        options: [
+          { text: "Provide maximum autonomy with minimal daily supervision.", isCorrect: true },
+          { text: "Control all decisions through rigid formal rules.", isCorrect: false },
+          { text: "Conduct frequent collaborative consensus meetings.", isCorrect: false },
+          { text: "Focus primarily on inspiring grand long-term strategic visions.", isCorrect: false }
+        ],
+        rationale: "Laissez-faire leaders adopt a hands-off approach, granting maximum autonomy without daily supervision."
+      },
+      {
+        id: 6,
+        question: "6. Under what condition is Laissez-Faire leadership MOST likely to fail?",
+        options: [
+          { text: "When employees are highly experienced specialists.", isCorrect: false },
+          { text: "When team members lack self-discipline or experience.", isCorrect: true },
+          { text: "When projects have long-term flexible deadlines.", isCorrect: false },
+          { text: "When the leader delegates too many resources.", isCorrect: false }
+        ],
+        rationale: "The speaker states: 'If team members lack experience, self-discipline, or clarity, projects can quickly become chaotic.'"
+      },
+      {
+        id: 7,
+        question: "7. How do Transformational Leaders primarily motivate their workforce?",
+        options: [
+          { text: "By offering financial bonuses for routine administrative tasks.", isCorrect: false },
+          { text: "By enforcing strict downward communication rules.", isCorrect: false },
+          { text: "By inspiring employees with a shared long-term vision.", isCorrect: true },
+          { text: "By giving workers total freedom without providing resources.", isCorrect: false }
+        ],
+        rationale: "Transformational leaders focus on inspiring employees through a shared long-term vision."
+      },
+      {
+        id: 8,
+        question: "8. What is a potential risk associated with Transformational Leadership?",
+        options: [
+          { text: "Employee burnout from relentless drive and high goals.", isCorrect: true },
+          { text: "Complete paralysis due to endless group voting.", isCorrect: false },
+          { text: "Extremely high staff turnover due to rigid punishment.", isCorrect: false },
+          { text: "Inability to adapt to sudden changes in market trends.", isCorrect: false }
+        ],
+        rationale: "The lecture explicitly mentions 'the risk of burnout' because leaders push for constant improvement and high goals."
+      },
+      {
+        id: 9,
+        question: "9. Which leadership style is recommended for teams composed of experienced specialists or research labs?",
+        options: [
+          { text: "Autocratic Leadership.", isCorrect: false },
+          { text: "Laissez-Faire Leadership.", isCorrect: true },
+          { text: "Strict Hierarchical Management.", isCorrect: false },
+          { text: "Paternalistic Supervision.", isCorrect: false }
+        ],
+        rationale: "The transcript notes that Laissez-Faire suits 'senior research laboratories, elite technology startups, or teams composed of experienced specialists.'"
+      },
+      {
+        id: 10,
+        question: "10. Which statement correctly compares Democratic and Transformational leadership styles?",
+        options: [
+          { text: "Democratic relies on strict rules; Transformational avoids vision.", isCorrect: false },
+          { text: "Democratic emphasizes participatory decisions; Transformational emphasizes vision and mentoring.", isCorrect: true },
+          { text: "Both styles completely avoid team meetings or communication.", isCorrect: false },
+          { text: "Democratic causes burnout; Transformational is always slow.", isCorrect: false }
+        ],
+        rationale: "Democratic focuses on shared decision-making/participation, while Transformational focuses on vision, mentorship, and change."
+      }
+    ];
+
+    // State Variables
+    let userAnswers = {};
+    let synth = window.speechSynthesis;
+    let utterance = null;
+    let isPlaying = false;
+
+    // Render Questions
+    function renderQuestions() {
+      const container = document.getElementById('questionsContainer');
+      container.innerHTML = questionsData.map((q, idx) => `
+        <div id="q-card-${q.id}" class="bg-slate-800/80 border border-slate-700/60 rounded-2xl p-5 shadow-xl transition-all">
+          <h3 class="font-semibold text-slate-200 text-sm mb-3.5 leading-snug">${q.question}</h3>
+          <div class="space-y-2.5">
+            ${q.options.map((opt, oIdx) => `
+              <label onclick="selectAnswer(${q.id}, ${oIdx})" class="flex items-start gap-3 p-3 rounded-xl border border-slate-700/60 bg-slate-900/50 hover:bg-slate-700/40 cursor-pointer transition text-xs text-slate-300">
+                <input type="radio" name="q_${q.id}" value="${oIdx}" class="mt-0.5 text-indigo-600 focus:ring-indigo-500">
+                <span class="flex-1 leading-relaxed">${opt.text}</span>
+              </label>
+            `).join('')}
+          </div>
+          <div id="feedback-${q.id}" class="hidden mt-4 p-3.5 rounded-xl text-xs leading-relaxed"></div>
+        </div>
+      `).join('');
+    }
+
+    // Handle Selection
+    function selectAnswer(qId, optionIdx) {
+      userAnswers[qId] = optionIdx;
+    }
+
+    // Text-to-Speech Player
+    function toggleAudio() {
+      if (!('speechSynthesis' in window)) {
+        alert('Browser Text-to-Speech is not supported. Please click "Read Text" to review the lecture transcript manually.');
+        return;
+      }
+
+      if (isPlaying) {
+        synth.pause();
+        isPlaying = false;
+        updateAudioUI('Paused');
+      } else {
+        if (synth.paused) {
+          synth.resume();
+          isPlaying = true;
+          updateAudioUI('Playing');
+        } else {
+          startSpeech();
+        }
+      }
+    }
+
+    function startSpeech() {
+      synth.cancel();
+      utterance = new SpeechSynthesisUtterance(lectureText);
+      
+      const speed = parseFloat(document.getElementById('speedSelect').value);
+      utterance.rate = speed;
+      utterance.lang = 'en-US';
+
+      // Pick an English voice if available
+      const voices = synth.getVoices();
+      const enVoice = voices.find(v => v.lang.startsWith('en') && v.name.includes('Natural')) || voices.find(v => v.lang.startsWith('en'));
+      if (enVoice) utterance.voice = enVoice;
+
+      utterance.onstart = () => {
+        isPlaying = true;
+        updateAudioUI('Playing');
+      };
+
+      utterance.onend = () => {
+        isPlaying = false;
+        updateAudioUI('Finished');
+      };
+
+      utterance.onerror = () => {
+        isPlaying = false;
+        updateAudioUI('Error');
+      };
+
+      synth.speak(utterance);
+    }
+
+    function stopAudio() {
+      if (synth) {
+        synth.cancel();
+        isPlaying = false;
+        updateAudioUI('Stopped');
+      }
+    }
+
+    function changeSpeed() {
+      if (isPlaying) {
+        startSpeech(); // Restart with new speed
+      }
+    }
+
+    function updateAudioUI(status) {
+      const playIcon = document.getElementById('playIcon');
+      const speechStatus = document.getElementById('speechStatus');
+      
+      if (isPlaying) {
+        playIcon.className = "fa-solid fa-pause text-lg";
+        speechStatus.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Playing`;
+        speechStatus.className = "text-emerald-400 flex items-center gap-1";
+      } else {
+        playIcon.className = "fa-solid fa-play text-lg ml-0.5";
+        speechStatus.innerHTML = status === 'Paused' ? `<span class="w-2 h-2 rounded-full bg-amber-400"></span> Paused` : `<span class="w-2 h-2 rounded-full bg-indigo-400"></span> Ready`;
+        speechStatus.className = status === 'Paused' ? "text-amber-400 flex items-center gap-1" : "text-indigo-400 flex items-center gap-1";
+      }
+    }
+
+    // Modal Transcript
+    function toggleTranscriptModal() {
+      const modal = document.getElementById('transcriptModal');
+      modal.classList.toggle('hidden');
+    }
+
+    // Grade Exam
+    function gradeExam() {
+      let correctCount = 0;
+      const total = questionsData.length;
+
+      questionsData.forEach(q => {
+        const selectedIdx = userAnswers[q.id];
+        const card = document.getElementById(`q-card-${q.id}`);
+        const feedback = document.getElementById(`feedback-${q.id}`);
+        
+        feedback.classList.remove('hidden', 'bg-emerald-950/60', 'border-emerald-800', 'text-emerald-200', 'bg-rose-950/60', 'border-rose-800', 'text-rose-200');
+
+        if (selectedIdx !== undefined && q.options[selectedIdx].isCorrect) {
+          correctCount++;
+          card.className = "bg-emerald-950/30 border border-emerald-600/60 rounded-2xl p-5 shadow-xl transition-all";
+          feedback.classList.add('bg-emerald-950/60', 'border', 'border-emerald-800', 'text-emerald-200');
+          feedback.innerHTML = `<p class="font-bold mb-1"><i class="fa-solid fa-circle-check text-emerald-400 mr-1.5"></i> Correct!</p>${q.rationale}`;
+        } else {
+          card.className = "bg-rose-950/20 border border-rose-600/60 rounded-2xl p-5 shadow-xl transition-all";
+          feedback.classList.add('bg-rose-950/60', 'border', 'border-rose-800', 'text-rose-200');
+          
+          const correctOpt = q.options.find(o => o.isCorrect);
+          feedback.innerHTML = `
+            <p class="font-bold mb-1"><i class="fa-solid fa-circle-xmark text-rose-400 mr-1.5"></i> Incorrect</p>
+            <p class="mb-1"><strong>Correct Answer:</strong> ${correctOpt.text}</p>
+            <p class="text-slate-300 text-xs mt-1.5 pt-1.5 border-t border-rose-900/60">${q.rationale}</p>
+          `;
+        }
+      });
+
+      const score = Math.round((correctCount / total) * 100);
+      const scoreBadge = document.getElementById('scoreBadge');
+      const scoreText = document.getElementById('scoreText');
+      const passFailText = document.getElementById('passFailText');
+
+      scoreBadge.classList.remove('hidden');
+      scoreText.innerText = `${score} / 100`;
+
+      if (score >= 60) {
+        scoreText.className = "text-2xl font-black text-emerald-400";
+        passFailText.innerHTML = `<span class="text-emerald-400 font-bold"><i class="fa-solid fa-trophy mr-1"></i> PASSED (Tebrikler!)</span>`;
+      } else {
+        scoreText.className = "text-2xl font-black text-rose-400";
+        passFailText.innerHTML = `<span class="text-rose-400 font-bold"><i class="fa-solid fa-circle-exclamation mr-1"></i> FAILED (Baraj: 60)</span>`;
+      }
+
+      // Scroll to top of results
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Reset Exam
+    function resetExam() {
+      userAnswers = {};
+      stopAudio();
+      document.getElementById('scoreBadge').classList.add('hidden');
+      renderQuestions();
+    }
+
+    // Local Storage Note Auto-save
+    const notesArea = document.getElementById('userNotes');
+    notesArea.value = localStorage.getItem('prep_listening_notes') || '';
+    notesArea.addEventListener('input', () => {
+      localStorage.setItem('prep_listening_notes', notesArea.value);
+    });
+
+    // Initialize
+    window.onload = () => {
+      renderQuestions();
+      document.getElementById('transcriptContent').innerText = lectureText;
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.onvoiceschanged = () => {};
+      }
+    };
+  </script>
+</body>
+</html>
+```eof
+
+### Sınava Hazırlık ve Çalışma Önerileri
+
+1. **Simülasyon Yöntemi:**
+   - Uygulamadaki **"Play Lecture"** butonuna basarak dinlemeyi başlatın.
+   - İlk dinlemede sorulara hiç bakmayın, sadece sol taraftaki **"My Note-Taking Sheet"** kutusuna notlar alın.
+   - Metin bitince soruları çözün ve **"Submit Exam"** butonuna basarak 60 barajını geçip geçemediğinizi görün.
+
+2. **56 -> 70+ Puan Sıçraması İçin Not Alma Kısaltmaları:**
+   - Dinlerken kelimelerin tamamını yazmaya çalışmayın (yetişemezsiniz).
+   - `Adv / +` : Avantajlar
+   - `Disadv / -` : Dezavantajlar
+   - `Env` : Uygun ortam / sektör (Environment)
+   - `Emp` : Uygun çalışan / kişilik (Employee type)
+   - `Communication (Comm)` : İletişim yönü (Top-down / 2-way)
+
+Telafi sınavınızda şimdiden başarılar dilerim! Ufak bir dikkat farkı ile bu sınavı rahatlıkla geçeceksiniz.
