@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proficiency Listening Deneme 5 (Güncel)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans">
+
+    <!-- Header -->
+    <header class="bg-indigo-900 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-brain text-2xl text-amber-400"></i>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight">Proficiency Listening Prep - Deneme 5 (Güncellenmiş)</h1>
+                    <p class="text-xs text-indigo-200">B2 Seviye Akademik Dinleme Pratiği (Psikoloji Odaklı)</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="bg-indigo-800 px-3 py-1.5 rounded-lg text-xs font-semibold text-indigo-100 flex items-center gap-2">
+                    <i class="fa-solid fa-bullseye text-amber-400"></i>
+                    <span>Hedef: 60+ Puan</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-6 flex-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- Left Navigation Panel -->
+        <div class="lg:col-span-3 space-y-4">
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 space-y-2">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Sınav Bölümleri</h2>
+                
+                <button onclick="switchTab('part1')" id="tab-part1" class="w-full text-left p-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between bg-indigo-50 text-indigo-700 border border-indigo-200 shadow-sm">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-file-pen text-indigo-600"></i>
+                        <span>Part 1: Note-Taking</span>
+                    </div>
+                    <span class="text-xs bg-indigo-200 text-indigo-800 px-2 py-0.5 rounded-full font-bold">50 Puan</span>
+                </button>
+
+                <button onclick="switchTab('part2')" id="tab-part2" class="w-full text-left p-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between text-slate-600 hover:bg-slate-100">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-headphones text-slate-500"></i>
+                        <span>Part 2: While-Listening</span>
+                    </div>
+                    <span class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full font-bold">50 Puan</span>
+                </button>
+            </div>
+
+            <div class="bg-purple-50 border border-purple-200 p-4 rounded-xl text-purple-900 text-xs space-y-2">
+                <div class="font-bold text-purple-800 flex items-center gap-1.5 text-sm">
+                    <i class="fa-solid fa-bolt text-purple-600"></i>
+                    <span>Deneme 5 Odak Noktası</span>
+                </div>
+                <ul class="list-disc pl-4 space-y-1.5 text-purple-800">
+                    <li>Bu denemedeki iki metin de <strong>Psikoloji</strong> üzerinedir. </li>
+                    <li><em>Cognitive overload, analysis paralysis, opportunity cost</em> gibi terimlerin tanımlarını kaçırmayın.</li>
+                </ul>
+            </div>
+            
+            <div id="tts-warning" class="hidden bg-red-50 border border-red-200 p-3 rounded-xl text-red-800 text-xs">
+                <i class="fa-solid fa-triangle-exclamation mr-1"></i> Tarayıcınız ses sentezini desteklemiyor. Chrome/Edge kullanın.
+            </div>
+        </div>
+
+        <!-- Center Content Area -->
+        <div class="lg:col-span-9 space-y-6">
+
+            <!-- PART 1 SECTION (Note-Taking) -->
+            <div id="section-part1" class="space-y-6">
+                <!-- Audio Player -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                    <div class="flex flex-wrap justify-between items-center gap-2 border-b border-slate-100 pb-4">
+                        <div>
+                            <span class="text-xs font-semibold text-indigo-600 uppercase tracking-wider">Part 1 - Lecture 1</span>
+                            <h2 class="text-xl font-bold text-slate-800">The Attention Economy & Digital Minimalism</h2>
+                            <p class="text-xs text-slate-500 mt-1">Teknoloji & Sosyal Psikoloji | Sınav Süresi Metni 2 Defa Dinletilir</p>
+                        </div>
+                        <div class="flex items-center gap-2 bg-slate-100 p-1.5 rounded-lg border border-slate-200">
+                            <span class="text-xs text-slate-500 font-medium pl-2">Okuma Hızı:</span>
+                            <button onclick="setSpeed(0.85)" class="speed-btn px-2 py-1 text-xs font-semibold rounded bg-white shadow-sm text-slate-700">0.85x</button>
+                            <button onclick="setSpeed(1.0)" class="speed-btn px-2 py-1 text-xs font-semibold rounded bg-indigo-600 text-white shadow-sm">1.0x</button>
+                            <button onclick="setSpeed(1.15)" class="speed-btn px-2 py-1 text-xs font-semibold rounded bg-white shadow-sm text-slate-700">1.15x</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-indigo-950 rounded-xl p-4 text-white flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center space-x-3 w-full md:w-auto">
+                            <button id="p1-play-btn" onclick="toggleAudio('part1')" class="w-12 h-12 bg-amber-400 hover:bg-amber-300 text-indigo-950 rounded-full flex items-center justify-center font-bold shadow-lg transition-transform active:scale-95">
+                                <i class="fa-solid fa-play text-lg ml-0.5" id="p1-play-icon"></i>
+                            </button>
+                            <div>
+                                <div class="text-sm font-semibold" id="p1-audio-status">Dinlemeyi Başlat</div>
+                                <div class="text-xs text-indigo-300" id="p1-listen-count">Dinleme Hakkı: 1 / 2</div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/2 space-y-1">
+                            <div class="w-full bg-indigo-900 rounded-full h-2 overflow-hidden">
+                                <div id="p1-progress" class="bg-amber-400 h-2 w-0 transition-all duration-300"></div>
+                            </div>
+                        </div>
+                        <button onclick="toggleTranscript('p1-transcript')" class="text-xs bg-indigo-800 hover:bg-indigo-700 text-indigo-100 px-3 py-2 rounded-lg transition-colors border border-indigo-700 flex items-center gap-1.5">
+                            <i class="fa-solid fa-file-lines"></i>
+                            <span>Metni Göster</span>
+                        </button>
+                    </div>
+
+                    <!-- Transcript -->
+                    <div id="p1-transcript" class="hidden bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs text-slate-700 leading-relaxed max-h-60 overflow-y-auto custom-scrollbar font-mono">
+                        <div class="font-bold text-indigo-900 mb-2">LECTURE SCRIPT (Part 1):</div>
+                        <p id="p1-script-text">
+                            Hello everyone. In today's seminar, we are exploring the intersection of modern technology and human psychology. Specifically, we will discuss the "attention economy" and a growing counter-movement known as digital minimalism.<br><br>
+                            To understand the attention economy, we must recognize that in the digital age, information is no longer scarce. What is scarce is human attention. Major tech companies and social media platforms do not sell software; they sell your time and attention to advertisers. To maximize their profits, these platforms are engineered by behavioral psychologists to be highly addictive.<br><br>
+                            One of the core psychological mechanisms they use is called "intermittent reinforcement." This is the exact same principle used in casino slot machines. When you pull down to refresh your social media feed, you don't know if you will see something boring or something highly rewarding, like a notification or a funny video. This unpredictability causes the brain to release a surge of dopamine, keeping you constantly checking your device.<br><br>
+                            The constant bombardment of notifications and infinite scrolling leads to a state known as "cognitive overload." When the brain is overwhelmed by too much information, it drastically reduces our ability to perform deep, focused work. Students and professionals alike are finding it increasingly difficult to concentrate on a single task for more than fifteen minutes without feeling the urge to check their phones.<br><br>
+                            In response to this crisis, computer science professor Cal Newport introduced the concept of "digital minimalism." Digital minimalism is not about throwing away all your devices and living in a forest. Rather, it is a philosophy where you intentionally curate your digital tools. A digital minimalist asks: "Does this app add significant value to my life, or is it just a distraction?"<br><br>
+                            To adopt this lifestyle, Newport recommends a 30-day digital detox. During this period, you remove all non-essential applications from your phone. After the 30 days, you slowly reintroduce only the tools that genuinely serve your personal or professional goals, but with strict rules on how and when you use them.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Note-Taking Area & Questions -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex flex-col h-[520px]">
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                                <i class="fa-solid fa-pen-to-square text-indigo-600"></i>
+                                <span>Note-Taking Sheet</span>
+                            </h3>
+                        </div>
+                        <p class="text-xs text-slate-500 mb-2">Tanımlara odaklanın (Attention Economy, Intermittent Reinforcement vb.):</p>
+                        <textarea id="p1-notes" placeholder="- Attention Economy: selling human...
+- Mechanism used: Intermittent reinforcement (like...)
+- Negative effect: Cognitive overload = ...
+- Solution: Digital Minimalism (Cal Newport)
+- Strategy/Step 1: ..." 
+                        class="w-full flex-1 p-3 text-xs bg-amber-50/50 border border-amber-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none resize-none font-mono leading-relaxed custom-scrollbar"></textarea>
+                    </div>
+
+                    <!-- Questions -->
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex flex-col h-[520px] overflow-y-auto custom-scrollbar space-y-5">
+                        <div class="border-b border-slate-100 pb-2">
+                            <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                                <i class="fa-solid fa-clipboard-question text-indigo-600"></i>
+                                <span>Note-Taking Questions</span>
+                            </h3>
+                        </div>
+
+                        <form id="p1-form" class="space-y-5">
+                            <!-- Q1 -->
+                            <div class="space-y-2 border-b border-slate-100 pb-4">
+                                <p class="text-xs font-semibold text-slate-800">1. In the "attention economy," what is considered the primary scarce resource that companies sell?</p>
+                                <div class="space-y-1.5 text-xs text-slate-700">
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q1" value="A" class="mt-0.5"><span>Human attention and time.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q1" value="B" class="mt-0.5"><span>Premium software licenses.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q1" value="C" class="mt-0.5"><span>High-speed internet access.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q1" value="D" class="mt-0.5"><span>Educational information.</span></label>
+                                </div>
+                                <div id="p1_q1_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                            </div>
+                            <!-- Q2 -->
+                            <div class="space-y-2 border-b border-slate-100 pb-4">
+                                <p class="text-xs font-semibold text-slate-800">2. Which psychological mechanism do social media platforms share with casino slot machines?</p>
+                                <div class="space-y-1.5 text-xs text-slate-700">
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q2" value="A" class="mt-0.5"><span>Cognitive overload.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q2" value="B" class="mt-0.5"><span>Intermittent reinforcement.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q2" value="C" class="mt-0.5"><span>Digital curation.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q2" value="D" class="mt-0.5"><span>Constant financial reward.</span></label>
+                                </div>
+                                <div id="p1_q2_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                            </div>
+                            <!-- Q3 -->
+                            <div class="space-y-2 border-b border-slate-100 pb-4">
+                                <p class="text-xs font-semibold text-slate-800">3. What is the direct consequence of "cognitive overload" mentioned in the lecture?</p>
+                                <div class="space-y-1.5 text-xs text-slate-700">
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q3" value="A" class="mt-0.5"><span>Users become highly aggressive towards tech companies.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q3" value="B" class="mt-0.5"><span>Devices frequently crash due to too many notifications.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q3" value="C" class="mt-0.5"><span>A drastic reduction in the ability to perform deep, focused work.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q3" value="D" class="mt-0.5"><span>A sudden desire to delete all social media accounts permanently.</span></label>
+                                </div>
+                                <div id="p1_q3_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                            </div>
+                            <!-- Q4 -->
+                            <div class="space-y-2 border-b border-slate-100 pb-4">
+                                <p class="text-xs font-semibold text-slate-800">4. According to Cal Newport, what is the core philosophy of "digital minimalism"?</p>
+                                <div class="space-y-1.5 text-xs text-slate-700">
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q4" value="A" class="mt-0.5"><span>Throwing away all smart devices and returning to analog tools.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q4" value="B" class="mt-0.5"><span>Intentionally curating digital tools to only include those that add significant value.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q4" value="C" class="mt-0.5"><span>Limiting internet usage to exactly fifteen minutes per day.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q4" value="D" class="mt-0.5"><span>Using only free, open-source software applications.</span></label>
+                                </div>
+                                <div id="p1_q4_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                            </div>
+                            <!-- Q5 -->
+                            <div class="space-y-2 pb-2">
+                                <p class="text-xs font-semibold text-slate-800">5. What is the recommended first step to adopt a digital minimalist lifestyle?</p>
+                                <div class="space-y-1.5 text-xs text-slate-700">
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q5" value="A" class="mt-0.5"><span>Completing a 30-day digital detox by removing non-essential apps.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q5" value="B" class="mt-0.5"><span>Turning off all phone notifications permanently.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q5" value="C" class="mt-0.5"><span>Taking a month-long vacation to a remote forest.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q5" value="D" class="mt-0.5"><span>Paying for premium subscriptions to remove advertisements.</span></label>
+                                </div>
+                                <div id="p1_q5_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PART 2 SECTION (While-Listening) -->
+            <div id="section-part2" class="hidden space-y-6">
+                <!-- Audio Player -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                    <div class="flex flex-wrap justify-between items-center gap-2 border-b border-slate-100 pb-4">
+                        <div>
+                            <span class="text-xs font-semibold text-teal-600 uppercase tracking-wider">Part 2 - Lecture 2</span>
+                            <h2 class="text-xl font-bold text-slate-800">The Paradox of Choice in Modern Society</h2>
+                            <p class="text-xs text-slate-500 mt-1">Davranışsal Ekonomi & Tüketici Psikolojisi | While-Listening Mode</p>
+                        </div>
+                        <div class="flex items-center gap-2 bg-slate-100 p-1.5 rounded-lg border border-slate-200">
+                            <span class="text-xs text-slate-500 font-medium pl-2">Okuma Hızı:</span>
+                            <button onclick="setSpeed(0.85)" class="speed-btn px-2 py-1 text-xs font-semibold rounded bg-white shadow-sm text-slate-700">0.85x</button>
+                            <button onclick="setSpeed(1.0)" class="speed-btn px-2 py-1 text-xs font-semibold rounded bg-teal-600 text-white shadow-sm">1.0x</button>
+                            <button onclick="setSpeed(1.15)" class="speed-btn px-2 py-1 text-xs font-semibold rounded bg-white shadow-sm text-slate-700">1.15x</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900 rounded-xl p-4 text-white flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center space-x-3 w-full md:w-auto">
+                            <button id="p2-play-btn" onclick="toggleAudio('part2')" class="w-12 h-12 bg-teal-400 hover:bg-teal-300 text-slate-950 rounded-full flex items-center justify-center font-bold shadow-lg transition-transform active:scale-95">
+                                <i class="fa-solid fa-play text-lg ml-0.5" id="p2-play-icon"></i>
+                            </button>
+                            <div>
+                                <div class="text-sm font-semibold" id="p2-audio-status">Dinlemeyi Başlat</div>
+                                <div class="text-xs text-slate-300" id="p2-listen-count">Dinleme Hakkı: 1 / 2</div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/2 space-y-1">
+                            <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                                <div id="p2-progress" class="bg-teal-400 h-2 w-0 transition-all duration-300"></div>
+                            </div>
+                        </div>
+                        <button onclick="toggleTranscript('p2-transcript')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-100 px-3 py-2 rounded-lg transition-colors border border-slate-700 flex items-center gap-1.5">
+                            <i class="fa-solid fa-file-lines"></i>
+                            <span>Metni Göster</span>
+                        </button>
+                    </div>
+
+                    <!-- Transcript -->
+                    <div id="p2-transcript" class="hidden bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs text-slate-700 leading-relaxed max-h-60 overflow-y-auto custom-scrollbar font-mono">
+                        <div class="font-bold text-teal-900 mb-2">LECTURE SCRIPT (Part 2):</div>
+                        <p id="p2-script-text">
+                            Welcome to today's psychology and consumer behavior lecture. Today, we are exploring a fascinating concept popularized by psychologist Barry Schwartz, known as the "Paradox of Choice." In modern societies, there is a fundamental assumption that maximizing freedom means maximizing choice. We naturally believe that the more options we have, the happier we will be. However, extensive behavioral research suggests the exact opposite is true.<br><br>
+                            When people are presented with an overwhelming number of choices, they experience several negative psychological effects. The first is a phenomenon called "analysis paralysis." Imagine walking into a supermarket to buy olive oil, and you are confronted with fifty different brands. Instead of feeling liberated by these options, the brain becomes overwhelmed. As a result, consumers often feel paralyzed and may avoid making a decision altogether, walking out of the store empty-handed.<br><br>
+                            The second negative effect is a significant decrease in satisfaction after a decision is finally made. This happens due to "opportunity costs." When you have dozens of alternatives, it is incredibly easy to imagine that one of the unchosen options was actually better. This leads to buyer's remorse, or regret, which subtracts from the overall satisfaction you get from your final purchase.<br><br>
+                            Furthermore, having excessive choices creates an escalation of expectations. In a world with only one type of jeans, if they fit poorly, you blame the world or the manufacturer. But in a modern world with hundreds of styles, if your jeans aren't absolutely perfect, you blame yourself for making the wrong choice. The abundance of options makes us expect perfection.<br><br>
+                            To combat this paradox, psychologists divide consumers into two categories: maximizers and satisficers. Maximizers obsessively research to find the absolute best option, which often leads to exhaustion and regret. Satisficers, on the other hand, have a set of clear criteria and choose the first option that meets those standards. Studies consistently show that satisficers, who comfortably settle for "good enough," are significantly happier and experience much less anxiety than maximizers.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- While-Listening Questions -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-6">
+                    <div class="border-b border-slate-100 pb-3 flex justify-between items-center">
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
+                                <i class="fa-solid fa-list-check text-teal-600"></i>
+                                <span>While-Listening Questions</span>
+                            </h3>
+                        </div>
+                    </div>
+
+                    <form id="p2-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Q1 -->
+                        <div class="space-y-2 border-b md:border-b-0 md:border-r border-slate-100 pb-4 md:pr-4">
+                            <p class="text-xs font-semibold text-slate-800">1. What fundamental assumption does the "Paradox of Choice" challenge?</p>
+                            <div class="space-y-1.5 text-xs text-slate-700">
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q1" value="A" class="mt-0.5"><span>The belief that more options automatically lead to greater freedom and happiness.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q1" value="B" class="mt-0.5"><span>The idea that consumers prefer shopping online rather than in physical stores.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q1" value="C" class="mt-0.5"><span>The assumption that expensive products are always of higher quality.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q1" value="D" class="mt-0.5"><span>The theory that psychology has no impact on economic decisions.</span></label>
+                            </div>
+                            <div id="p2_q1_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                        </div>
+                        <!-- Q2 -->
+                        <div class="space-y-2 border-b border-slate-100 pb-4">
+                            <p class="text-xs font-semibold text-slate-800">2. What does the term "analysis paralysis" describe in the context of the lecture?</p>
+                            <div class="space-y-1.5 text-xs text-slate-700">
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q2" value="A" class="mt-0.5"><span>A medical condition caused by poor diet and stress.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q2" value="B" class="mt-0.5"><span>The ability to quickly analyze data to make the best financial choice.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q2" value="C" class="mt-0.5"><span>The inability to make a decision because the brain is overwhelmed by too many options.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q2" value="D" class="mt-0.5"><span>A strategy used by supermarkets to force customers to buy more items.</span></label>
+                            </div>
+                            <div id="p2_q2_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                        </div>
+                        <!-- Q3 -->
+                        <div class="space-y-2 border-b md:border-b-0 md:border-r border-slate-100 pb-4 md:pr-4">
+                            <p class="text-xs font-semibold text-slate-800">3. How does having many alternatives affect our satisfaction after making a purchase?</p>
+                            <div class="space-y-1.5 text-xs text-slate-700">
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q3" value="A" class="mt-0.5"><span>It significantly increases our satisfaction because we feel empowered.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q3" value="B" class="mt-0.5"><span>It decreases satisfaction because we worry about the "opportunity costs" of unchosen options.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q3" value="C" class="mt-0.5"><span>It has no psychological effect on post-purchase satisfaction.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q3" value="D" class="mt-0.5"><span>It makes us want to return to the store and buy every single alternative.</span></label>
+                            </div>
+                            <div id="p2_q3_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                        </div>
+                        <!-- Q4 -->
+                        <div class="space-y-2 border-b border-slate-100 pb-4">
+                            <p class="text-xs font-semibold text-slate-800">4. According to the speaker, what happens when a product falls short of perfection in a world with hundreds of choices?</p>
+                            <div class="space-y-1.5 text-xs text-slate-700">
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q4" value="A" class="mt-0.5"><span>Consumers blame themselves for making the wrong choice.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q4" value="B" class="mt-0.5"><span>Consumers successfully sue the manufacturer for false advertising.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q4" value="C" class="mt-0.5"><span>Consumers quickly adapt and forget about the product's flaws.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q4" value="D" class="mt-0.5"><span>Consumers blame the government for a lack of regulations.</span></label>
+                            </div>
+                            <div id="p2_q4_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                        </div>
+                        <!-- Q5 -->
+                        <div class="space-y-2 col-span-1 md:col-span-2">
+                            <p class="text-xs font-semibold text-slate-800">5. What is the main difference between a "maximizer" and a "satisficer"?</p>
+                            <div class="space-y-1.5 text-xs text-slate-700 grid grid-cols-1 md:grid-cols-2 gap-2">
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q5" value="A" class="mt-0.5"><span>A maximizer spends the least amount of money, while a satisficer buys luxury goods.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q5" value="B" class="mt-0.5"><span>A maximizer relies on luck, while a satisficer relies on advertising.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q5" value="C" class="mt-0.5"><span>A satisficer settles for "good enough" and is happier, while a maximizer seeks the absolute best.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q5" value="D" class="mt-0.5"><span>A satisficer never makes a decision, while a maximizer always chooses the first option.</span></label>
+                            </div>
+                            <div id="p2_q5_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- ACTION BAR -->
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div>
+                    <span class="text-xs text-slate-500">Tüm soruları tamamladığınızda sınavı sonlandırın:</span>
+                    <div id="status-message" class="text-xs font-semibold text-slate-700">Henüz sınav teslim edilmedi.</div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="resetExam()" class="px-4 py-2 text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">Sıfırla</button>
+                    <button onclick="finishExam()" class="px-6 py-2.5 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-md transition-all">Sınavı Bitir ve Değerlendir</button>
+                </div>
+            </div>
+
+            <!-- RESULT BOX -->
+            <div id="result-box" class="hidden bg-white p-6 rounded-xl shadow-lg border-2 border-indigo-500 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <h3 class="font-bold text-slate-800 text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-chart-line text-indigo-600"></i>
+                        <span>Sınav Sonucu ve Analiz</span>
+                    </h3>
+                    <span id="pass-status-badge" class="px-3 py-1 rounded-full text-xs font-bold">--</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                    <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100">
+                        <span class="text-xs text-indigo-600 font-semibold block">Part 1 Score</span>
+                        <span id="p1-score-disp" class="text-2xl font-black text-indigo-950">0 / 50</span>
+                    </div>
+                    <div class="bg-teal-50 p-4 rounded-xl border border-teal-100">
+                        <span class="text-xs text-teal-600 font-semibold block">Part 2 Score</span>
+                        <span id="p2-score-disp" class="text-2xl font-black text-teal-950">0 / 50</span>
+                    </div>
+                    <div class="bg-slate-100 p-4 rounded-xl border border-slate-200">
+                        <span class="text-xs text-slate-600 font-semibold block">Toplam Puan</span>
+                        <span id="total-score-disp" class="text-2xl font-black text-slate-900">0 / 100</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script>
+        let currentTab = 'part1';
+        let currentRate = 1.0;
+        let isPlaying = false;
+        let activeAudioPart = null;
+        let synth = window.speechSynthesis;
+        let utterance = null;
+
+        const p1Keys = {
+            p1_q1: { ans: 'A', exp: "Metinde 'What is scarce is human attention. Major tech companies... sell your time and attention' olarak belirtilmiştir." },
+            p1_q2: { ans: 'B', exp: "Metinde platformların 'intermittent reinforcement' mekanizmasını kumar makineleriyle (casino slot machines) aynı prensipte kullandığı açıklanmıştır." },
+            p1_q3: { ans: 'C', exp: "Metinde Cognitive Overload sonucunda 'drastically reduces our ability to perform deep, focused work' denilmiştir." },
+            p1_q4: { ans: 'B', exp: "Metinde Dijital Minimalizm, cihazları çöpe atmak değil 'intentionally curate your digital tools... that add significant value' olarak tanımlanmıştır." },
+            p1_q5: { ans: 'A', exp: "Metinde Cal Newport'un ilk adım olarak 'recommends a 30-day digital detox' önerdiği belirtilmiştir." }
+        };
+
+        const p2Keys = {
+            p2_q1: { ans: 'A', exp: "Metinde modern toplumlardaki yanılgının 'maximizing freedom means maximizing choice... the more options we have, the happier we will be' olduğu belirtilip, bunun çürütüldüğü açıklanmıştır." },
+            p2_q2: { ans: 'C', exp: "Analysis paralysis (analiz felci) kavramı metinde, aşırı seçenek karşısında 'brain becomes overwhelmed... paralyzed and may avoid making a decision altogether' olarak tanımlanmıştır." },
+            p2_q3: { ans: 'B', exp: "Metinde fazla seçenek olmasının satın alma sonrası pişmanlık (buyer's remorse) yarattığı ve 'decreases satisfaction due to opportunity costs' durumuna yol açtığı anlatılmıştır." },
+            p2_q4: { ans: 'A', exp: "Metinde yüzlerce seçenek olan bir dünyada karar mükemmel olmazsa, tüketicinin doğrudan 'blame yourself for making the wrong choice' (kendini suçladığı) söylenmiştir." },
+            p2_q5: { ans: 'C', exp: "Metinde Maximizer'ların 'obsessively research to find the absolute best option' yapıp mutsuz olduğu, Satisficer'ların ise 'settle for good enough' (yeterince iyi olana razı gelip) daha mutlu olduğu belirtilmiştir." }
+        };
+
+        function switchTab(tab) {
+            currentTab = tab;
+            stopAudio();
+            document.getElementById('tab-part1').className = tab === 'part1' ? 'w-full text-left p-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between bg-indigo-50 text-indigo-700 border border-indigo-200 shadow-sm' : 'w-full text-left p-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between text-slate-600 hover:bg-slate-100';
+            document.getElementById('tab-part2').className = tab === 'part2' ? 'w-full text-left p-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between bg-teal-50 text-teal-700 border border-teal-200 shadow-sm' : 'w-full text-left p-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between text-slate-600 hover:bg-slate-100';
+            document.getElementById('section-part1').classList.toggle('hidden', tab !== 'part1');
+            document.getElementById('section-part2').classList.toggle('hidden', tab !== 'part2');
+        }
+
+        function setSpeed(speed) {
+            currentRate = speed;
+            document.querySelectorAll('.speed-btn').forEach(btn => {
+                if (btn.innerText === speed + 'x') {
+                    btn.classList.add(currentTab === 'part1' ? 'bg-indigo-600' : 'bg-teal-600', 'text-white');
+                    btn.classList.remove('bg-white', 'text-slate-700');
+                } else {
+                    btn.classList.remove('bg-indigo-600', 'bg-teal-600', 'text-white');
+                    btn.classList.add('bg-white', 'text-slate-700');
+                }
+            });
+            if (isPlaying && utterance) {
+                const part = activeAudioPart;
+                stopAudio();
+                toggleAudio(part);
+            }
+        }
+
+        function toggleAudio(part) {
+            if (isPlaying && activeAudioPart === part) { stopAudio(); return; }
+            stopAudio();
+            activeAudioPart = part;
+            isPlaying = true;
+            const textId = part === 'part1' ? 'p1-script-text' : 'p2-script-text';
+            utterance = new SpeechSynthesisUtterance(document.getElementById(textId).innerText);
+            utterance.rate = currentRate;
+            utterance.lang = 'en-US';
+
+            document.getElementById(part === 'part1' ? 'p1-play-icon' : 'p2-play-icon').className = 'fa-solid fa-pause text-lg';
+            document.getElementById(part === 'part1' ? 'p1-audio-status' : 'p2-audio-status').innerText = 'Oynatılıyor...';
+
+            let progressInterval = setInterval(() => {
+                if (!isPlaying) { clearInterval(progressInterval); return; }
+                const prog = document.getElementById(part === 'part1' ? 'p1-progress' : 'p2-progress');
+                let currWidth = parseFloat(prog.style.width || '0');
+                if (currWidth < 100) prog.style.width = (currWidth + 0.6) + '%';
+            }, 1000);
+
+            utterance.onend = function() {
+                stopAudio();
+                document.getElementById(part === 'part1' ? 'p1-progress' : 'p2-progress').style.width = '100%';
+                document.getElementById(part === 'part1' ? 'p1-audio-status' : 'p2-audio-status').innerText = 'Tamamlandı';
+            };
+            synth.speak(utterance);
+        }
+
+        function stopAudio() {
+            if (synth.speaking) synth.cancel();
+            isPlaying = false;
+            document.getElementById('p1-play-icon').className = 'fa-solid fa-play text-lg ml-0.5';
+            document.getElementById('p2-play-icon').className = 'fa-solid fa-play text-lg ml-0.5';
+            document.getElementById('p1-audio-status').innerText = 'Dinlemeyi Başlat';
+            document.getElementById('p2-audio-status').innerText = 'Dinlemeyi Başlat';
+            activeAudioPart = null;
+        }
+
+        function toggleTranscript(id) { document.getElementById(id).classList.toggle('hidden'); }
+
+        function finishExam() {
+            stopAudio();
+            let p1Correct = 0, p2Correct = 0;
+
+            const evaluate = (keys, partPrefix) => {
+                let correctCount = 0;
+                for (let q in keys) {
+                    const selected = document.querySelector(`input[name="${q}"]:checked`);
+                    const expEl = document.getElementById(`${q}_exp`);
+                    expEl.classList.remove('hidden', 'bg-emerald-50', 'bg-rose-50', 'text-emerald-800', 'text-rose-800');
+                    if (selected && selected.value === keys[q].ans) {
+                        correctCount++;
+                        expEl.classList.add('bg-emerald-50', 'text-emerald-800');
+                        expEl.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600"></i> <strong>Doğru!</strong> ${keys[q].exp}`;
+                    } else {
+                        expEl.classList.add('bg-rose-50', 'text-rose-800');
+                        expEl.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-600"></i> <strong>Yanlış! Cevap: ${keys[q].ans}.</strong> ${keys[q].exp}`;
+                    }
+                }
+                return correctCount;
+            };
+
+            p1Correct = evaluate(p1Keys, 'p1');
+            p2Correct = evaluate(p2Keys, 'p2');
+
+            const totalScore = (p1Correct * 10) + (p2Correct * 10);
+            document.getElementById('p1-score-disp').innerText = `${p1Correct * 10} / 50`;
+            document.getElementById('p2-score-disp').innerText = `${p2Correct * 10} / 50`;
+            document.getElementById('total-score-disp').innerText = `${totalScore} / 100`;
+
+            const resultBox = document.getElementById('result-box');
+            const badge = document.getElementById('pass-status-badge');
+            resultBox.classList.remove('hidden');
+
+            if (totalScore >= 60) {
+                badge.className = 'px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300';
+                badge.innerText = 'GEÇTİNİZ! 🎉';
+            } else {
+                badge.className = 'px-3 py-1 rounded-full text-xs font-bold bg-rose-100 text-rose-800 border border-rose-300';
+                badge.innerText = 'KALDINIZ (60 Altı)';
+            }
+            document.getElementById('status-message').innerText = `Sınav tamamlandı. Toplam Puan: ${totalScore}/100`;
+            resultBox.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function resetExam() {
+            stopAudio();
+            document.getElementById('p1-form').reset();
+            document.getElementById('p2-form').reset();
+            document.getElementById('p1-notes').value = '';
+            document.querySelectorAll('[id$="_exp"]').forEach(el => el.classList.add('hidden'));
+            document.getElementById('p1-progress').style.width = '0%';
+            document.getElementById('p2-progress').style.width = '0%';
+            document.getElementById('result-box').classList.add('hidden');
+            document.getElementById('status-message').innerText = 'Henüz sınav teslim edilmedi.';
+        }
+    </script>
+</body>
+</html>
