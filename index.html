@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proficiency Listening Telafi Sınavı Hazırlık Platformu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans">
+
+    <!-- Header -->
+    <header class="bg-indigo-900 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-graduation-cap text-2xl text-amber-400"></i>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight">Proficiency Listening Prep</h1>
+                    <p class="text-xs text-indigo-200">Telafi Sınavı Çalışma Seti (Hedef: 60+ Geçme Notu)</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="bg-indigo-800 px-3 py-1.5 rounded-lg text-xs font-semibold text-indigo-100 flex items-center gap-2">
+                    <i class="fa-solid fa-bullseye text-amber-400"></i>
+                    <span>Geçme Notu: 60/100</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 py-6 flex-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- Left Navigation & Instructions Panel -->
+        <div class="lg:col-span-3 space-y-4">
+            <!-- Navigation -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 space-y-2">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Sınav Bölümleri</h2>
+                
+                <button onclick="switchTab('part1')" id="tab-part1" class="w-full text-left p-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between bg-indigo-50 text-indigo-700 border border-indigo-200">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-file-pen text-indigo-600"></i>
+                        <span>Part 1: Note-Taking</span>
+                    </div>
+                    <span class="text-xs bg-indigo-200 text-indigo-800 px-2 py-0.5 rounded-full font-bold">50 Puan</span>
+                </button>
+
+                <button onclick="switchTab('part2')" id="tab-part2" class="w-full text-left p-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between text-slate-600 hover:bg-slate-100">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-headphones text-slate-500"></i>
+                        <span>Part 2: While-Listening</span>
+                    </div>
+                    <span class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full font-bold">50 Puan</span>
+                </button>
+            </div>
+
+            <!-- Exam Tips & Strategy -->
+            <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl text-amber-900 text-xs space-y-2">
+                <div class="font-bold text-amber-800 flex items-center gap-1.5 text-sm">
+                    <i class="fa-solid fa-lightbulb text-amber-600"></i>
+                    <span>Telafi Sınavı Stratejisi</span>
+                </div>
+                <ul class="list-disc pl-4 space-y-1.5 text-amber-800">
+                    <li><strong>Signpost Words:</strong> "First", "Another benefit", "On the other hand", "In contrast" gibi geçiş kelimelerine odaklanın.</li>
+                    <li><strong>Not Alma (Part 1):</strong> Kelime kelime yazmayın. Başlıklar, kısaltmalar ve oklarla neden-sonuç ilişkileri kurun.</li>
+                    <li><strong>Sayısal & Detay Bilgiler:</strong> İsimler, 3-4 maddelik listeler ve tanımlar soru potansiyeli taşır.</li>
+                </ul>
+            </div>
+
+            <!-- Speech Synthesis Status -->
+            <div id="tts-warning" class="hidden bg-red-50 border border-red-200 p-3 rounded-xl text-red-800 text-xs">
+                <i class="fa-solid fa-triangle-exclamation mr-1"></i> Tarayıcınız ses sentezini desteklemiyor. Metin okuma özelliğini kullanmak için Chrome/Edge kullanın.
+            </div>
+        </div>
+
+        <!-- Center Content Area -->
+        <div class="lg:col-span-9 space-y-6">
+
+            <!-- PART 1 SECTION -->
+            <div id="section-part1" class="space-y-6">
+                <!-- Audio / Player Box -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                    <div class="flex flex-wrap justify-between items-center gap-2 border-b border-slate-100 pb-4">
+                        <div>
+                            <span class="text-xs font-semibold text-indigo-600 uppercase tracking-wider">Part 1 - Lecture 1</span>
+                            <h2 class="text-xl font-bold text-slate-800">Workplace Motivation Theories (Theory X, Y & Z)</h2>
+                            <p class="text-xs text-slate-500 mt-1">İş Dünyası & Yönetim Psikolojisi | Sınav Süresi Metni 2 Defa Dinletilir</p>
+                        </div>
+                        <div class="flex items-center gap-2 bg-slate-100 p-1.5 rounded-lg border border-slate-200">
+                            <span class="text-xs text-slate-500 font-medium pl-2">Okuma Hızı:</span>
+                            <button onclick="setSpeed(0.85)" class="speed-btn px-2 py-1 text-xs font-semibold rounded bg-white shadow-sm text-slate-700">0.85x</button>
+                            <button onclick="setSpeed(1.0)" class="speed-btn px-2 py-1 text-xs font-semibold rounded bg-indigo-600 text-white shadow-sm">1.0x</button>
+                            <button onclick="setSpeed(1.15)" class="speed-btn px-2 py-1 text-xs font-semibold rounded bg-white shadow-sm text-slate-700">1.15x</button>
+                        </div>
+                    </div>
+
+                    <!-- Audio Controls -->
+                    <div class="bg-indigo-950 rounded-xl p-4 text-white flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center space-x-3 w-full md:w-auto">
+                            <button id="p1-play-btn" onclick="toggleAudio('part1')" class="w-12 h-12 bg-amber-400 hover:bg-amber-300 text-indigo-950 rounded-full flex items-center justify-center font-bold shadow-lg transition-transform active:scale-95">
+                                <i class="fa-solid fa-play text-lg ml-0.5" id="p1-play-icon"></i>
+                            </button>
+                            <div>
+                                <div class="text-sm font-semibold" id="p1-audio-status">Dinlemeyi Başlat</div>
+                                <div class="text-xs text-indigo-300" id="p1-listen-count">Dinleme Hakkı: 1 / 2</div>
+                            </div>
+                        </div>
+
+                        <!-- Progress Bar Simulated -->
+                        <div class="w-full md:w-1/2 space-y-1">
+                            <div class="w-full bg-indigo-900 rounded-full h-2 overflow-hidden">
+                                <div id="p1-progress" class="bg-amber-400 h-2 w-0 transition-all duration-300"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] text-indigo-300">
+                                <span id="p1-time-curr">00:00</span>
+                                <span id="p1-time-total">--:--</span>
+                            </div>
+                        </div>
+
+                        <!-- Transcript Toggle -->
+                        <button onclick="toggleTranscript('p1-transcript')" class="text-xs bg-indigo-800 hover:bg-indigo-700 text-indigo-100 px-3 py-2 rounded-lg transition-colors border border-indigo-700 flex items-center gap-1.5">
+                            <i class="fa-solid fa-file-lines"></i>
+                            <span>Metni Göster / Gizle</span>
+                        </button>
+                    </div>
+
+                    <!-- Collapsible Transcript -->
+                    <div id="p1-transcript" class="hidden bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs text-slate-700 leading-relaxed max-h-60 overflow-y-auto custom-scrollbar font-mono">
+                        <div class="font-bold text-indigo-900 mb-2">LECTURE SCRIPT (Part 1):</div>
+                        <p id="p1-script-text">
+                            Good morning, everyone. In today's lecture on organizational management, we will discuss how leaders view human motivation in the workplace. Specifically, we will look at three famous theories proposed by management scholars: Theory X, Theory Y, and Theory Z.<br><br>
+                            
+                            Let's begin with the first two theories, which were developed by Douglas McGregor in the 1960s. McGregor argued that a manager's behavior depends largely on their fundamental assumptions about human nature.<br><br>
+                            
+                            First, let's examine Theory X. Theory X assumes that the average employee inherently dislikes work and will avoid it whenever possible. Because of this negative view, managers who follow Theory X believe that workers must be strictly controlled, directed, and even threatened with punishment to get them to achieve company goals. Another key characteristic of Theory X is that employees are seen as lacking ambition, preferring security above all else, and avoiding responsibility.<br><br>
+                            
+                            Now, what are the benefits and drawbacks of this approach? On the positive side, Theory X management can be effective in crisis situations or in mass production assembly lines where tasks are highly repetitive and demand immediate, strict discipline. However, on the negative side, it creates a rigid working environment, suppresses creativity, and leads to high levels of employee dissatisfaction.<br><br>
+                            
+                            Moving on to Theory Y, this approach represents a contrasting, optimistic view of human behavior. Theory Y assumes that work is as natural as play or rest. According to Theory Y, employees are naturally self-motivated, eager to accept responsibility, and capable of exercising self-direction. Managers who adopt Theory Y do not rely on strict control; instead, they focus on creating an environment that rewards creativity and personal growth.<br><br>
+                            
+                            The main advantage of Theory Y is that it leads to higher job satisfaction, stronger employee loyalty, and greater innovation. However, a major disadvantage is that it may not work effectively in large organizations with inexperienced staff who require clear, direct supervision.<br><br>
+                            
+                            Finally, let's turn to the fourth category of modern management models, often referred to as Theory Z. Developed by William Ouchi in the 1980s, Theory Z blends traditional Japanese management practices with Western business culture. Unlike Theory X and Y, which focus heavily on individual psychological assumptions, Theory Z focuses on the overall culture of the organization.<br><br>
+                            
+                            Theory Z emphasizes long-term employment, collective decision-making, and holistic concern for the well-being of employees and their families. The primary benefit of Theory Z is extremely high employee loyalty and low turnover rates. The main drawback, however, is that decision-making can be very slow because it requires consensus among all group members. The kind of employee who thrives in a Theory Z organization is someone who values teamwork, stability, and long-term career growth over rapid individual promotion.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Note Taking & Questions Work Area -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Note Taking Notepad -->
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex flex-col h-[520px]">
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                                <i class="fa-solid fa-pen-to-square text-indigo-600"></i>
+                                <span>Note-Taking Sheet</span>
+                            </h3>
+                            <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded">Notlarınız kaydedilir</span>
+                        </div>
+                        <p class="text-xs text-slate-500 mb-2">Dinlerken anahtar kelimeleri, 3 teorinin özelliklerini, avantaj ve dezavantajlarını buraya not edin:</p>
+                        <textarea id="p1-notes" placeholder="Örnek Not Düzeni:
+- Theory X: Dislikes work, needs control, security > ambition. Adv: Crisis/Assembly lines. Disadv: Low creativity.
+- Theory Y: Self-motivated, loves responsibility. Adv: High loyalty, innovation. Disadv: Needs experienced staff.
+- Theory Z: Ouchi (1980s), Japanese+Western, long-term employment, consensus. Adv: Low turnover. Disadv: Slow decision making..." 
+                        class="w-full flex-1 p-3 text-xs bg-amber-50/50 border border-amber-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none resize-none font-mono leading-relaxed custom-scrollbar"></textarea>
+                    </div>
+
+                    <!-- Questions Container -->
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex flex-col h-[520px] overflow-y-auto custom-scrollbar space-y-5">
+                        <div class="border-b border-slate-100 pb-2">
+                            <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                                <i class="fa-solid fa-clipboard-question text-indigo-600"></i>
+                                <span>Note-Taking Questions</span>
+                            </h3>
+                            <p class="text-xs text-slate-500">Notlarınıza bakarak aşağıdaki 5 soruyu yanıtlayın.</p>
+                        </div>
+
+                        <form id="p1-form" class="space-y-5">
+                            <!-- Q1 -->
+                            <div class="space-y-2 border-b border-slate-100 pb-4">
+                                <p class="text-xs font-semibold text-slate-800">1. According to the lecture, what is a primary assumption of Theory X regarding employees?</p>
+                                <div class="space-y-1.5 text-xs text-slate-700">
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                        <input type="radio" name="p1_q1" value="A" class="mt-0.5">
+                                        <span>They naturally seek leadership roles and responsibility.</span>
+                                    </label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                        <input type="radio" name="p1_q1" value="B" class="mt-0.5">
+                                        <span>They prioritize personal job security over professional ambition.</span>
+                                    </label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                        <input type="radio" name="p1_q1" value="C" class="mt-0.5">
+                                        <span>They perform best when allowed total self-direction.</span>
+                                    </label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                        <input type="radio" name="p1_q1" value="D" class="mt-0.5">
+                                        <span>They thrive under long-term employment stability.</span>
+                                    </label>
+                                </div>
+                                <div id="p1_q1_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                            </div>
+
+                            <!-- Q2 -->
+                            <div class="space-y-2 border-b border-slate-100 pb-4">
+                                <p class="text-xs font-semibold text-slate-800">2. In which workplace environment is Theory X management mentioned as being effective?</p>
+                                <div class="space-y-1.5 text-xs text-slate-700">
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                        <input type="radio" name="p1_q2" value="A" class="mt-0.5">
+                                        <span>Innovative research and development tech companies.</span>
+                                    </label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                        <input type="radio" name="p1_q2" value="B" class="mt-0.5">
+                                        <span>Repetitive assembly lines during crisis situations.</span>
+                                    </label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                        <input type="radio" name="p1_q2" value="C" class="mt-0.5">
+                                        <span>Organizations undergoing rapid individual restructuring.</span>
+                                    </label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                        <input type="radio" name="p1_q2" value="D" class="mt-0.5">
+                                        <span>Small family-owned retail businesses.</span>
+                                    </label>
+                                </div>
+                                <div id="p1_q2_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                            </div>
+
+                            <!-- Q3 -->
+                            <div class="space-y-2 border-b border-slate-100 pb-4">
+                                <p class="text-xs font-semibold text-slate-800">3. What is cited as a main limitation of applying Theory Y in an organization?</p>
+                                <div class="space-y-1.5 text-xs text-slate-700">
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                        <input type="radio" name="p1_q3" value="A" class="mt-0.5">
+                                        <span>It leads to extreme worker turnover and low morale.</span>
+                                    </label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                        <input type="radio" name="p1_q3" value="B" class="mt-0.5">
+                                        <span>It suppresses employee innovation and individual creativity.</span>
+                                    </label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                        <input type="radio" name="p1_q3" value="C" class="mt-0.5">
+                                        <span>It is ineffective with inexperienced workers needing clear direction.</span>
+                                    </label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                        <input type="radio" name="p1_q3" value="D" class="mt-0.5">
+                                        <span>It relies heavily on Japanese management principles.</span>
+                                    </label>
+                                </div>
+                                <div id="p1_q3_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                            </div>
+
+                            <!-- Q4 -->
+                            <div class="space-y-2 border-b border-slate-100 pb-4">
+                                <p class="text-xs font-semibold text-slate-800">4. Who developed Theory Z, and what does it primarily focus on?</p>
+                                <div class="space-y-1.5 text-xs text-slate-700">
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                        <input type="radio" name="p1_q4" value="A" class="mt-0.5">
+                                        <span>Douglas McGregor; focusing on employee punishment systems.</span>
+                                    </label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                        <input type="radio" name="p1_q4" value="B" class="mt-0.5">
+                                        <span>William Ouchi; focusing on overall organizational culture and consensus.</span>
+                                    </label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                        <input type="radio" name="p1_q4" value="C" class="mt-0.5">
+                                        <span>Charles Handy; focusing on four types of authority structures.</span>
+                                    </label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                        <input type="radio" name="p1_q4" value="D" class="mt-0.5">
+                                        <span>Douglas McGregor; focusing on rapid individual promotions.</span>
+                                    </label>
+                                </div>
+                                <div id="p1_q4_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                            </div>
+
+                            <!-- Q5 -->
+                            <div class="space-y-2 pb-2">
+                                <p class="text-xs font-semibold text-slate-800">5. What is mentioned as a major drawback of Theory Z management?</p>
+                                <div class="space-y-1.5 text-xs text-slate-700">
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                        <input type="radio" name="p1_q5" value="A" class="mt-0.5">
+                                        <span>High employee turnover rates due to short contracts.</span>
+                                    </label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                        <input type="radio" name="p1_q5" value="B" class="mt-0.5">
+                                        <span>Slowness in decision-making due to the need for group consensus.</span>
+                                    </label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                        <input type="radio" name="p1_q5" value="C" class="mt-0.5">
+                                        <span>Excessive reliance on a single central source of authority.</span>
+                                    </label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                        <input type="radio" name="p1_q5" value="D" class="mt-0.5">
+                                        <span>Complete absence of job security for junior employees.</span>
+                                    </label>
+                                </div>
+                                <div id="p1_q5_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- PART 2 SECTION -->
+            <div id="section-part2" class="hidden space-y-6">
+                <!-- Audio / Player Box -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                    <div class="flex flex-wrap justify-between items-center gap-2 border-b border-slate-100 pb-4">
+                        <div>
+                            <span class="text-xs font-semibold text-teal-600 uppercase tracking-wider">Part 2 - Lecture 2</span>
+                            <h2 class="text-xl font-bold text-slate-800">The Urban Heat Island (UHI) Effect</h2>
+                            <p class="text-xs text-slate-500 mt-1">Environmental Science & Urban Planning | While-Listening Mode</p>
+                        </div>
+                        <div class="flex items-center gap-2 bg-slate-100 p-1.5 rounded-lg border border-slate-200">
+                            <span class="text-xs text-slate-500 font-medium pl-2">Okuma Hızı:</span>
+                            <button onclick="setSpeed(0.85)" class="speed-btn px-2 py-1 text-xs font-semibold rounded bg-white shadow-sm text-slate-700">0.85x</button>
+                            <button onclick="setSpeed(1.0)" class="speed-btn px-2 py-1 text-xs font-semibold rounded bg-teal-600 text-white shadow-sm">1.0x</button>
+                            <button onclick="setSpeed(1.15)" class="speed-btn px-2 py-1 text-xs font-semibold rounded bg-white shadow-sm text-slate-700">1.15x</button>
+                        </div>
+                    </div>
+
+                    <!-- Audio Controls -->
+                    <div class="bg-slate-900 rounded-xl p-4 text-white flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center space-x-3 w-full md:w-auto">
+                            <button id="p2-play-btn" onclick="toggleAudio('part2')" class="w-12 h-12 bg-teal-400 hover:bg-teal-300 text-slate-950 rounded-full flex items-center justify-center font-bold shadow-lg transition-transform active:scale-95">
+                                <i class="fa-solid fa-play text-lg ml-0.5" id="p2-play-icon"></i>
+                            </button>
+                            <div>
+                                <div class="text-sm font-semibold" id="p2-audio-status">Dinlemeyi Başlat</div>
+                                <div class="text-xs text-slate-300" id="p2-listen-count">Dinleme Hakkı: 1 / 2</div>
+                            </div>
+                        </div>
+
+                        <!-- Progress Bar Simulated -->
+                        <div class="w-full md:w-1/2 space-y-1">
+                            <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                                <div id="p2-progress" class="bg-teal-400 h-2 w-0 transition-all duration-300"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] text-slate-400">
+                                <span id="p2-time-curr">00:00</span>
+                                <span id="p2-time-total">--:--</span>
+                            </div>
+                        </div>
+
+                        <!-- Transcript Toggle -->
+                        <button onclick="toggleTranscript('p2-transcript')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-100 px-3 py-2 rounded-lg transition-colors border border-slate-700 flex items-center gap-1.5">
+                            <i class="fa-solid fa-file-lines"></i>
+                            <span>Metni Göster / Gizle</span>
+                        </button>
+                    </div>
+
+                    <!-- Collapsible Transcript -->
+                    <div id="p2-transcript" class="hidden bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs text-slate-700 leading-relaxed max-h-60 overflow-y-auto custom-scrollbar font-mono">
+                        <div class="font-bold text-teal-900 mb-2">LECTURE SCRIPT (Part 2):</div>
+                        <p id="p2-script-text">
+                            Good afternoon. Today we are going to examine an environmental phenomenon known as the Urban Heat Island effect, or UHI. An urban heat island refers to a metropolitan area that is significantly warmer than its surrounding rural regions.<br><br>
+                            
+                            There are three primary drivers behind the Urban Heat Island effect. First and foremost is the prevalence of dark, non-porous surfaces such as asphalt roads, concrete sidewalks, and dark roofs. These construction materials absorb massive amounts of solar radiation during the day and re-emit that energy as heat during the night.<br><br>
+                            
+                            The second major cause is the loss of natural vegetation. In natural countryside environments, trees and plants cool the air through a process called evapotranspiration. When vegetation is removed to construct tall buildings, this natural cooling mechanism is virtually destroyed.<br><br>
+                            
+                            The third factor is anthropogenic heat—heat produced directly by human activities, particularly air conditioning units, industrial factories, and motor vehicle emissions.<br><br>
+                            
+                            Now, what are the primary impacts of elevated urban temperatures? Firstly, during heatwaves, higher temperatures lead to increased demand for cooling, which strains electricity grids and increases fossil fuel energy consumption. Secondly, elevated temperatures accelerate chemical reactions in the atmosphere, leading to higher ground-level ozone and worsening smog levels, which severely impacts human respiratory health.<br><br>
+                            
+                            To combat this growing crisis, urban planners recommend three main mitigation solutions. The first is implementing green roofs—covering rooftops with living plants to absorb solar radiation and provide insulation. The second solution is using high-albedo or cool pavements, which reflect solar heat rather than absorbing it. Finally, cities are investing heavily in urban forestry programs, planting thousands of shade trees along streets to restore natural cooling.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- While Listening Questions Box -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-6">
+                    <div class="border-b border-slate-100 pb-3 flex justify-between items-center">
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
+                                <i class="fa-solid fa-list-check text-teal-600"></i>
+                                <span>While-Listening Questions</span>
+                            </h3>
+                            <p class="text-xs text-slate-500">Dinleme esnasında soruları yanıtlayınız (5 Soru - 50 Puan)</p>
+                        </div>
+                    </div>
+
+                    <form id="p2-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Q1 -->
+                        <div class="space-y-2 border-b md:border-b-0 md:border-r border-slate-100 pb-4 md:pr-4">
+                            <p class="text-xs font-semibold text-slate-800">1. What is defined as the Urban Heat Island (UHI) effect?</p>
+                            <div class="space-y-1.5 text-xs text-slate-700">
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                    <input type="radio" name="p2_q1" value="A" class="mt-0.5">
+                                    <span>Rural regions becoming hotter than nearby coastal towns.</span>
+                                </label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                    <input type="radio" name="p2_q1" value="B" class="mt-0.5">
+                                    <span>Metropolitan areas being significantly warmer than surrounding rural areas.</span>
+                                </label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                    <input type="radio" name="p2_q1" value="C" class="mt-0.5">
+                                    <span>Industrial plants overheating due to excessive electrical strain.</span>
+                                </label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                    <input type="radio" name="p2_q1" value="D" class="mt-0.5">
+                                    <span>Rapid deforestation caused by seasonal heatwaves in tropical zones.</span>
+                                </label>
+                            </div>
+                            <div id="p2_q1_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                        </div>
+
+                        <!-- Q2 -->
+                        <div class="space-y-2 border-b border-slate-100 pb-4">
+                            <p class="text-xs font-semibold text-slate-800">2. Why do materials like asphalt and concrete contribute to the UHI effect?</p>
+                            <div class="space-y-1.5 text-xs text-slate-700">
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                    <input type="radio" name="p2_q2" value="A" class="mt-0.5">
+                                    <span>They reflect solar energy back into space instantly.</span>
+                                </label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                    <input type="radio" name="p2_q2" value="B" class="mt-0.5">
+                                    <span>They release dangerous chemical greenhouse gases when wet.</span>
+                                </label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                    <input type="radio" name="p2_q2" value="C" class="mt-0.5">
+                                    <span>They absorb solar radiation during the day and re-emit it at night.</span>
+                                </label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                    <input type="radio" name="p2_q2" value="D" class="mt-0.5">
+                                    <span>They block natural evapotranspiration from occurring in oceans.</span>
+                                </label>
+                            </div>
+                            <div id="p2_q2_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                        </div>
+
+                        <!-- Q3 -->
+                        <div class="space-y-2 border-b md:border-b-0 md:border-r border-slate-100 pb-4 md:pr-4">
+                            <p class="text-xs font-semibold text-slate-800">3. What natural process cools the air in rural environments according to the speaker?</p>
+                            <div class="space-y-1.5 text-xs text-slate-700">
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                    <input type="radio" name="p2_q3" value="A" class="mt-0.5">
+                                    <span>Evapotranspiration through trees and vegetation.</span>
+                                </label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                    <input type="radio" name="p2_q3" value="B" class="mt-0.5">
+                                    <span>High-albedo reflection from agricultural soil.</span>
+                                </label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                    <input type="radio" name="p2_q3" value="C" class="mt-0.5">
+                                    <span>Ground-level ozone chemical breakdown.</span>
+                                </label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                    <input type="radio" name="p2_q3" value="D" class="mt-0.5">
+                                    <span>Anthropogenic air conditioning output.</span>
+                                </label>
+                            </div>
+                            <div id="p2_q3_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                        </div>
+
+                        <!-- Q4 -->
+                        <div class="space-y-2 border-b border-slate-100 pb-4">
+                            <p class="text-xs font-semibold text-slate-800">4. Which atmospheric consequence is caused by higher urban temperatures?</p>
+                            <div class="space-y-1.5 text-xs text-slate-700">
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                    <input type="radio" name="p2_q4" value="A" class="mt-0.5">
+                                    <span>Decreased reliance on fossil fuels during winter.</span>
+                                </label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                    <input type="radio" name="p2_q4" value="B" class="mt-0.5">
+                                    <span>Increased ground-level ozone and worsening smog levels.</span>
+                                </label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                    <input type="radio" name="p2_q4" value="C" class="mt-0.5">
+                                    <span>Permanent loss of power grids in rural areas.</span>
+                                </label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                    <input type="radio" name="p2_q4" value="D" class="mt-0.5">
+                                    <span>Complete destruction of building insulation systems.</span>
+                                </label>
+                            </div>
+                            <div id="p2_q4_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                        </div>
+
+                        <!-- Q5 -->
+                        <div class="space-y-2 col-span-1 md:col-span-2">
+                            <p class="text-xs font-semibold text-slate-800">5. Which of the following is NOT mentioned as a solution by urban planners?</p>
+                            <div class="space-y-1.5 text-xs text-slate-700 grid grid-cols-1 md:grid-cols-2 gap-2">
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                    <input type="radio" name="p2_q5" value="A" class="mt-0.5">
+                                    <span>Implementing green roofs covered with living plants.</span>
+                                </label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                    <input type="radio" name="p2_q5" value="B" class="mt-0.5">
+                                    <span>Using high-albedo cool pavements that reflect solar heat.</span>
+                                </label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                    <input type="radio" name="p2_q5" value="C" class="mt-0.5">
+                                    <span>Banning all motor vehicle usage in metropolitan centers.</span>
+                                </label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer border border-transparent">
+                                    <input type="radio" name="p2_q5" value="D" class="mt-0.5">
+                                    <span>Investing in urban forestry programs along streets.</span>
+                                </label>
+                            </div>
+                            <div id="p2_q5_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- SUBMIT & RESULTS ACTION BAR -->
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div>
+                    <span class="text-xs text-slate-500">Tüm soruları tamamladığınızda sınavı sonlandırın:</span>
+                    <div id="status-message" class="text-xs font-semibold text-slate-700">Henüz sınav teslim edilmedi.</div>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <button onclick="resetExam()" class="px-4 py-2 text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">
+                        Sıfırla
+                    </button>
+                    <button onclick="finishExam()" class="px-6 py-2.5 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-md hover:shadow-indigo-200 transition-all">
+                        Sınavı Bitir ve Değerlendir
+                    </button>
+                </div>
+            </div>
+
+            <!-- SCORE MODAL / RESULT BOX -->
+            <div id="result-box" class="hidden bg-white p-6 rounded-xl shadow-lg border-2 border-indigo-500 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <h3 class="font-bold text-slate-800 text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-chart-line text-indigo-600"></i>
+                        <span>Sınav Sonucu ve Analiz</span>
+                    </h3>
+                    <span id="pass-status-badge" class="px-3 py-1 rounded-full text-xs font-bold">--</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                    <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100">
+                        <span class="text-xs text-indigo-600 font-semibold block">Part 1 Score</span>
+                        <span id="p1-score-disp" class="text-2xl font-black text-indigo-950">0 / 50</span>
+                    </div>
+                    <div class="bg-teal-50 p-4 rounded-xl border border-teal-100">
+                        <span class="text-xs text-teal-600 font-semibold block">Part 2 Score</span>
+                        <span id="p2-score-disp" class="text-2xl font-black text-teal-950">0 / 50</span>
+                    </div>
+                    <div class="bg-slate-100 p-4 rounded-xl border border-slate-200">
+                        <span class="text-xs text-slate-600 font-semibold block">Toplam Puan</span>
+                        <span id="total-score-disp" class="text-2xl font-black text-slate-900">0 / 100</span>
+                    </div>
+                </div>
+
+                <div id="advice-box" class="p-4 rounded-xl text-xs leading-relaxed space-y-1">
+                    <!-- Dynamic feedback advice will go here -->
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-4 mt-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            Proficiency Listening Practice Module &copy; 2026 | Telafi Sınavına Hazırlık
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // State management
+        let currentTab = 'part1';
+        let currentRate = 1.0;
+        let isPlaying = false;
+        let activeAudioPart = null;
+        let synth = window.speechSynthesis;
+        let utterance = null;
+
+        // Answer keys & Rationales
+        const p1Keys = {
+            p1_q1: { ans: 'B', exp: "Metinde 'employees are seen as lacking ambition, preferring security above all else' ifadesi geçmektedir." },
+            p1_q2: { ans: 'B', exp: "Metinde 'effective in crisis situations or in mass production assembly lines' ifadesiyle açıklanmıştır." },
+            p1_q3: { ans: 'C', exp: "Metinde 'it may not work effectively in large organizations with inexperienced staff who require clear, direct supervision' denilmiştir." },
+            p1_q4: { ans: 'B', exp: "Metinde 'Developed by William Ouchi in the 1980s... Theory Z focuses on the overall culture of the organization' ifadesi belirtilmiştir." },
+            p1_q5: { ans: 'B', exp: "Metinde 'decision-making can be very slow because it requires consensus among all group members' sorunun ana cevabıdır." }
+        };
+
+        const p2Keys = {
+            p2_q1: { ans: 'B', exp: "Metinde UHI tanımı: 'a metropolitan area that is significantly warmer than its surrounding rural regions' olarak yapılmıştır." },
+            p2_q2: { ans: 'C', exp: "Metinde 'absorb massive amounts of solar radiation during the day and re-emit that energy as heat during the night' denilmiştir." },
+            p2_q3: { ans: 'A', exp: "Metinde ağaç ve bitkilerin soğutma süreci 'a process called evapotranspiration' olarak belirtilmiştir." },
+            p2_q4: { ans: 'B', exp: "Metinde 'accelerate chemical reactions in the atmosphere, leading to higher ground-level ozone and worsening smog levels' denilmiştir." },
+            p2_q5: { ans: 'C', exp: "Motorlu araç kullanımının yasaklanmasından bahsedilmemiştir. Sadece yeşil çatılar, cool pavements ve şehir ormancılığı önerilmiştir." }
+        };
+
+        // Initialize Speech Synthesis warning check
+        window.onload = function() {
+            if (!('speechSynthesis' in window)) {
+                document.getElementById('tts-warning').classList.remove('hidden');
+            }
+        };
+
+        function switchTab(tab) {
+            currentTab = tab;
+            stopAudio();
+
+            // Button styling
+            document.getElementById('tab-part1').className = tab === 'part1' 
+                ? 'w-full text-left p-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between bg-indigo-50 text-indigo-700 border border-indigo-200 shadow-sm'
+                : 'w-full text-left p-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between text-slate-600 hover:bg-slate-100';
+
+            document.getElementById('tab-part2').className = tab === 'part2' 
+                ? 'w-full text-left p-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between bg-teal-50 text-teal-700 border border-teal-200 shadow-sm'
+                : 'w-full text-left p-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between text-slate-600 hover:bg-slate-100';
+
+            // Section Visibility
+            document.getElementById('section-part1').classList.toggle('hidden', tab !== 'part1');
+            document.getElementById('section-part2').classList.toggle('hidden', tab !== 'part2');
+        }
+
+        function setSpeed(speed) {
+            currentRate = speed;
+            document.querySelectorAll('.speed-btn').forEach(btn => {
+                if (btn.innerText === speed + 'x') {
+                    btn.classList.add('bg-indigo-600', 'text-white');
+                    btn.classList.remove('bg-white', 'text-slate-700');
+                } else {
+                    btn.classList.remove('bg-indigo-600', 'text-white');
+                    btn.classList.add('bg-white', 'text-slate-700');
+                }
+            });
+            if (isPlaying && utterance) {
+                // Restart with new rate
+                const part = activeAudioPart;
+                stopAudio();
+                toggleAudio(part);
+            }
+        }
+
+        function toggleAudio(part) {
+            if (isPlaying && activeAudioPart === part) {
+                stopAudio();
+                return;
+            }
+
+            stopAudio();
+            activeAudioPart = part;
+            isPlaying = true;
+
+            const textId = part === 'part1' ? 'p1-script-text' : 'p2-script-text';
+            const rawText = document.getElementById(textId).innerText;
+
+            utterance = new SpeechSynthesisUtterance(rawText);
+            utterance.rate = currentRate;
+            utterance.lang = 'en-US';
+
+            // UI Changes for Playing
+            const btnId = part === 'part1' ? 'p1-play-btn' : 'p2-play-btn';
+            const iconId = part === 'part1' ? 'p1-play-icon' : 'p2-play-icon';
+            const statusId = part === 'part1' ? 'p1-audio-status' : 'p2-audio-status';
+            const progressId = part === 'part1' ? 'p1-progress' : 'p2-progress';
+
+            document.getElementById(iconId).className = 'fa-solid fa-pause text-lg';
+            document.getElementById(statusId).innerText = 'Oynatılıyor...';
+
+            let progressInterval = setInterval(() => {
+                if (!isPlaying) {
+                    clearInterval(progressInterval);
+                    return;
+                }
+                let currWidth = parseFloat(document.getElementById(progressId).style.width || '0');
+                if (currWidth < 100) {
+                    document.getElementById(progressId).style.width = (currWidth + 0.5) + '%';
+                }
+            }, 1000);
+
+            utterance.onend = function() {
+                stopAudio();
+                document.getElementById(progressId).style.width = '100%';
+                document.getElementById(statusId).innerText = 'Tamamlandı';
+            };
+
+            synth.speak(utterance);
+        }
+
+        function stopAudio() {
+            if (synth.speaking) {
+                synth.cancel();
+            }
+            isPlaying = false;
+            
+            document.getElementById('p1-play-icon').className = 'fa-solid fa-play text-lg ml-0.5';
+            document.getElementById('p2-play-icon').className = 'fa-solid fa-play text-lg ml-0.5';
+            document.getElementById('p1-audio-status').innerText = 'Dinlemeyi Başlat';
+            document.getElementById('p2-audio-status').innerText = 'Dinlemeyi Başlat';
+            activeAudioPart = null;
+        }
+
+        function toggleTranscript(id) {
+            const el = document.getElementById(id);
+            el.classList.toggle('hidden');
+        }
+
+        function finishExam() {
+            stopAudio();
+
+            let p1Correct = 0;
+            let p2Correct = 0;
+
+            // Evaluate Part 1
+            for (let q in p1Keys) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                const expEl = document.getElementById(`${q}_exp`);
+                expEl.classList.remove('hidden', 'bg-emerald-50', 'bg-rose-50', 'text-emerald-800', 'text-rose-800');
+
+                if (selected && selected.value === p1Keys[q].ans) {
+                    p1Correct++;
+                    expEl.classList.add('bg-emerald-50', 'text-emerald-800');
+                    expEl.innerHTML = `<i class="fa-solid fa-circle-check mr-1 text-emerald-600"></i> <strong>Doğru!</strong> ${p1Keys[q].exp}`;
+                } else {
+                    expEl.classList.add('bg-rose-50', 'text-rose-800');
+                    expEl.innerHTML = `<i class="fa-solid fa-circle-xmark mr-1 text-rose-600"></i> <strong>Yanlış!</strong> Doğru cevap: <strong>${p1Keys[q].ans}</strong>. ${p1Keys[q].exp}`;
+                }
+            }
+
+            // Evaluate Part 2
+            for (let q in p2Keys) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                const expEl = document.getElementById(`${q}_exp`);
+                expEl.classList.remove('hidden', 'bg-emerald-50', 'bg-rose-50', 'text-emerald-800', 'text-rose-800');
+
+                if (selected && selected.value === p2Keys[q].ans) {
+                    p2Correct++;
+                    expEl.classList.add('bg-emerald-50', 'text-emerald-800');
+                    expEl.innerHTML = `<i class="fa-solid fa-circle-check mr-1 text-emerald-600"></i> <strong>Doğru!</strong> ${p2Keys[q].exp}`;
+                } else {
+                    expEl.classList.add('bg-rose-50', 'text-rose-800');
+                    expEl.innerHTML = `<i class="fa-solid fa-circle-xmark mr-1 text-rose-600"></i> <strong>Yanlış!</strong> Doğru cevap: <strong>${p2Keys[q].ans}</strong>. ${p2Keys[q].exp}`;
+                }
+            }
+
+            // Calculate Scores (Each part 50 points total, 10 points per question)
+            const p1Score = p1Correct * 10;
+            const p2Score = p2Correct * 10;
+            const totalScore = p1Score + p2Score;
+
+            // Display Results
+            document.getElementById('p1-score-disp').innerText = `${p1Score} / 50`;
+            document.getElementById('p2-score-disp').innerText = `${p2Score} / 50`;
+            document.getElementById('total-score-disp').innerText = `${totalScore} / 100`;
+
+            const resultBox = document.getElementById('result-box');
+            const badge = document.getElementById('pass-status-badge');
+            const adviceBox = document.getElementById('advice-box');
+
+            resultBox.classList.remove('hidden');
+
+            if (totalScore >= 60) {
+                badge.className = 'px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300';
+                badge.innerText = 'GEÇTİNİZ! 🎉';
+
+                adviceBox.className = 'p-4 rounded-xl text-xs leading-relaxed bg-emerald-50 border border-emerald-200 text-emerald-900 space-y-1';
+                adviceBox.innerHTML = `<strong>Tebrikler! ${totalScore} puan alarak 60 puan barajını aştınız.</strong><br>
+                56 puanda kalmış olmanız sadece 1-2 küçük not alma eksikliğinden kaynaklanıyordu. Bu performansı telafi sınavına taşırsanız rahatlıkla hazırlığı geçebilirsiniz!`;
+            } else {
+                badge.className = 'px-3 py-1 rounded-full text-xs font-bold bg-rose-100 text-rose-800 border border-rose-300';
+                badge.innerText = 'KALDINIZ (60 Altı)';
+
+                adviceBox.className = 'p-4 rounded-xl text-xs leading-relaxed bg-rose-50 border border-rose-200 text-rose-900 space-y-1';
+                adviceBox.innerHTML = `<strong>Toplam Puanınız: ${totalScore}. Telafi sınavını geçmek için en az 60 puan almalısınız.</strong><br>
+                <strong>Gelişim Tavsiyesi:</strong> Yanlış yaptığınız soruların açıklamalarını inceleyin. Dinleme metninde <i>"First", "The second factor", "The main drawback"</i> gibi kilit geçiş kelimelerini not kağıdınıza başlık olarak yazmayı alışkanlık haline getirin.`;
+            }
+
+            document.getElementById('status-message').innerText = `Sınav tamamlandı. Toplam Puan: ${totalScore}/100`;
+            resultBox.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function resetExam() {
+            stopAudio();
+            document.getElementById('p1-form').reset();
+            document.getElementById('p2-form').reset();
+            document.getElementById('p1-notes').value = '';
+            
+            // Hide explanations
+            document.querySelectorAll('[id$="_exp"]').forEach(el => {
+                el.classList.add('hidden');
+            });
+
+            document.getElementById('p1-progress').style.width = '0%';
+            document.getElementById('p2-progress').style.width = '0%';
+            document.getElementById('result-box').classList.add('hidden');
+            document.getElementById('status-message').innerText = 'Henüz sınav teslim edilmedi.';
+        }
+    </script>
+</body>
+</html>
+```eof
+
+### Telafi Sınavına Hazırlanırken Dikkat Etmeniz Gereken 4 Altın İpucu:
+
+1. **İki Farklı Dinleme Yapısını Ayırt Edin:**
+   * **Note-Taking Listening (Part 1):** Sınav başlamadan önce soruları göremezsiniz. Dinleme sırasında boş kağıda not alırsınız, dinleme bittikten sonra sorular dağıtılır. Bu yüzden metindeki **tüm kategorileri, avantaj/dezavantajları ve kişi/teori isimlerini** kısaltmalarla not almalısınız.
+   * **While-Listening (Part 2):** Sorular önünüzde açıktır. Dinlerken aynı zamanda soruları okuyup işaretlersiniz.
+
+2. **İşaret Sözcüklerini (Signpost Words) Kaçırmayın:**
+   * Paylaştığınız ses kaydında konuşmacı: *"The first type is...", "Another characteristic is...", "One of the benefits...", "On the negative side...", "The next type..."* gibi kalıplarla paragrafları ayırıyor.
+   * Oluşturduğum interaktif uygulamadaki iki konuşma da tam olarak bu üniversite prof standardına göre hazırlanmıştır.
+
+3. **56'dan 60+ Üstüne Çıkma Stratejisi:**
+   * 56 puan almanız, İngilizce seviyenizin yeterli olduğunu ancak **not alma hızı veya soru yakalama dikkatsizliği** nedeniyle 1-2 soruyu kaçırdığınızı gösterir.
+   * Uygulamadaki **0.85x, 1.0x ve 1.15x** okuma hızı seçeneklerini kullanarak dinleme hızınızı kademeli olarak artırabilirsiniz.
+
+Hazırladığım `listening_exam_prep.html` dosyasını tarayıcınızda açarak hemen pratik yapabilir, tarayıcınızın sesli okuma motoruyla konuşmaları dinleyip not alabilirsiniz! Telafi sınavınızda başarılar dilerim!
