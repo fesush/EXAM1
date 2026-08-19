@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proficiency Listening Deneme 6 (İKÜ Formatı)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans">
+
+    <!-- Header -->
+    <header class="bg-indigo-900 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-university text-2xl text-amber-400"></i>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight">Proficiency Listening Prep - Deneme 6</h1>
+                    <p class="text-xs text-indigo-200">Akademik İngilizce Yeterlik Sınavı Formatı</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="bg-indigo-800 px-3 py-1.5 rounded-lg text-xs font-semibold text-indigo-100 flex items-center gap-2">
+                    <i class="fa-solid fa-bullseye text-amber-400"></i>
+                    <span>Hedef: 60+ Puan</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-6 flex-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- Left Navigation Panel -->
+        <div class="lg:col-span-3 space-y-4">
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 space-y-2">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Sınav Bölümleri</h2>
+                
+                <button onclick="switchTab('part1')" id="tab-part1" class="w-full text-left p-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between bg-indigo-50 text-indigo-700 border border-indigo-200 shadow-sm">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-file-pen text-indigo-600"></i>
+                        <span>Part 1: Note-Taking</span>
+                    </div>
+                    <span class="text-xs bg-indigo-200 text-indigo-800 px-2 py-0.5 rounded-full font-bold">50 Puan</span>
+                </button>
+
+                <button onclick="switchTab('part2')" id="tab-part2" class="w-full text-left p-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between text-slate-600 hover:bg-slate-100">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-headphones text-slate-500"></i>
+                        <span>Part 2: While-Listening</span>
+                    </div>
+                    <span class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full font-bold">50 Puan</span>
+                </button>
+            </div>
+
+            <div class="bg-blue-50 border border-blue-200 p-4 rounded-xl text-blue-900 text-xs space-y-2">
+                <div class="font-bold text-blue-800 flex items-center gap-1.5 text-sm">
+                    <i class="fa-solid fa-clipboard-check text-blue-600"></i>
+                    <span>Üniversite Sınavı İpuçları</span>
+                </div>
+                <ul class="list-disc pl-4 space-y-1.5 text-blue-800">
+                    <li>Konuşmacının verdiği <strong>deney/araştırma sonuçlarına</strong> (experiment results) dikkat edin. Üniversite sınavları genellikle deneyin kendisini değil, <em>sonucunu</em> sorar.</li>
+                    <li>Sıralama bildiren "Another tactic is...", "A more complex strategy is..." gibi yapıları duyduğunuz an not kağıdınızda yeni bir madde açın.</li>
+                </ul>
+            </div>
+            
+            <div id="tts-warning" class="hidden bg-red-50 border border-red-200 p-3 rounded-xl text-red-800 text-xs">
+                <i class="fa-solid fa-triangle-exclamation mr-1"></i> Tarayıcınız ses sentezini desteklemiyor. Chrome/Edge kullanın.
+            </div>
+        </div>
+
+        <!-- Center Content Area -->
+        <div class="lg:col-span-9 space-y-6">
+
+            <!-- PART 1 SECTION (Note-Taking) -->
+            <div id="section-part1" class="space-y-6">
+                <!-- Audio Player -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                    <div class="flex flex-wrap justify-between items-center gap-2 border-b border-slate-100 pb-4">
+                        <div>
+                            <span class="text-xs font-semibold text-indigo-600 uppercase tracking-wider">Part 1 - Lecture 1</span>
+                            <h2 class="text-xl font-bold text-slate-800">The Google Effect: Digital Amnesia</h2>
+                            <p class="text-xs text-slate-500 mt-1">Eğitim ve Bilişsel Psikoloji | Sınav Süresi Metni 2 Defa Dinletilir</p>
+                        </div>
+                        <div class="flex items-center gap-2 bg-slate-100 p-1.5 rounded-lg border border-slate-200">
+                            <span class="text-xs text-slate-500 font-medium pl-2">Okuma Hızı:</span>
+                            <button onclick="setSpeed(0.85)" class="speed-btn px-2 py-1 text-xs font-semibold rounded bg-white shadow-sm text-slate-700">0.85x</button>
+                            <button onclick="setSpeed(1.0)" class="speed-btn px-2 py-1 text-xs font-semibold rounded bg-indigo-600 text-white shadow-sm">1.0x</button>
+                            <button onclick="setSpeed(1.15)" class="speed-btn px-2 py-1 text-xs font-semibold rounded bg-white shadow-sm text-slate-700">1.15x</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-indigo-950 rounded-xl p-4 text-white flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center space-x-3 w-full md:w-auto">
+                            <button id="p1-play-btn" onclick="toggleAudio('part1')" class="w-12 h-12 bg-amber-400 hover:bg-amber-300 text-indigo-950 rounded-full flex items-center justify-center font-bold shadow-lg transition-transform active:scale-95">
+                                <i class="fa-solid fa-play text-lg ml-0.5" id="p1-play-icon"></i>
+                            </button>
+                            <div>
+                                <div class="text-sm font-semibold" id="p1-audio-status">Dinlemeyi Başlat</div>
+                                <div class="text-xs text-indigo-300" id="p1-listen-count">Dinleme Hakkı: 1 / 2</div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/2 space-y-1">
+                            <div class="w-full bg-indigo-900 rounded-full h-2 overflow-hidden">
+                                <div id="p1-progress" class="bg-amber-400 h-2 w-0 transition-all duration-300"></div>
+                            </div>
+                        </div>
+                        <button onclick="toggleTranscript('p1-transcript')" class="text-xs bg-indigo-800 hover:bg-indigo-700 text-indigo-100 px-3 py-2 rounded-lg transition-colors border border-indigo-700 flex items-center gap-1.5">
+                            <i class="fa-solid fa-file-lines"></i>
+                            <span>Metni Göster</span>
+                        </button>
+                    </div>
+
+                    <!-- Transcript -->
+                    <div id="p1-transcript" class="hidden bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs text-slate-700 leading-relaxed max-h-60 overflow-y-auto custom-scrollbar font-mono">
+                        <div class="font-bold text-indigo-900 mb-2">LECTURE SCRIPT (Part 1):</div>
+                        <p id="p1-script-text">
+                            Welcome to today's lecture on cognitive psychology. Today, we will examine how our reliance on the internet, specifically search engines and social media, is altering human memory. Psychologists refer to this phenomenon as 'digital amnesia' or the 'Google effect.' Digital amnesia is defined as the tendency to quickly forget information that we know can be easily accessed online.<br><br>
+                            In a landmark study, researchers asked participants to type trivia facts into a computer. Half of the participants were told their data would be saved, and the other half were told it would be erased permanently. The results were striking. The group that believed the information was saved made much less effort to remember the facts themselves. Instead of remembering the actual information, their brains prioritized remembering where to find the information—in this case, the specific folder on the computer where the data was stored.<br><br>
+                            This cognitive shift has major implications for modern education. True learning requires transferring information from our short-term working memory into our long-term memory. However, constant scrolling and relying on digital devices creates a state of 'superficial processing.' Because we do not engage deeply with the material, the critical transfer of knowledge to long-term memory rarely happens.<br><br>
+                            Despite this alarming trend, some neurologists argue that the Google effect isn't necessarily destroying our brains. Instead, they suggest our brains are simply adapting to act as an efficient index. By offloading the storage of raw, basic facts to the internet, we are theoretically freeing up our cognitive space for more complex problem-solving and critical thinking.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Note-Taking Area & Questions -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex flex-col h-[520px]">
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                                <i class="fa-solid fa-pen-to-square text-indigo-600"></i>
+                                <span>Note-Taking Sheet</span>
+                            </h3>
+                        </div>
+                        <p class="text-xs text-slate-500 mb-2">Araştırma deneyini ve eğitim üzerindeki etkilerini not alın:</p>
+                        <textarea id="p1-notes" placeholder="- Topic: Digital Amnesia (Google Effect)
+- Definition: ...
+- Computer Experiment result: Brains prioritized remembering WHERE to find info, not the...
+- Education impact: True learning needs transfer from short-term to...
+- Superficial processing: ...
+- Neurologists' positive view: Frees up cognitive space for..." 
+                        class="w-full flex-1 p-3 text-xs bg-amber-50/50 border border-amber-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none resize-none font-mono leading-relaxed custom-scrollbar"></textarea>
+                    </div>
+
+                    <!-- Questions -->
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex flex-col h-[520px] overflow-y-auto custom-scrollbar space-y-5">
+                        <div class="border-b border-slate-100 pb-2">
+                            <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                                <i class="fa-solid fa-clipboard-question text-indigo-600"></i>
+                                <span>Note-Taking Questions</span>
+                            </h3>
+                        </div>
+
+                        <form id="p1-form" class="space-y-5">
+                            <!-- Q1 -->
+                            <div class="space-y-2 border-b border-slate-100 pb-4">
+                                <p class="text-xs font-semibold text-slate-800">1. How does the speaker define "digital amnesia"?</p>
+                                <div class="space-y-1.5 text-xs text-slate-700">
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q1" value="A" class="mt-0.5"><span>A medical condition caused by staring at computer screens for too long.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q1" value="B" class="mt-0.5"><span>The inability to remember computer passwords and usernames.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q1" value="C" class="mt-0.5"><span>The tendency to quickly forget information that can be easily accessed online.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q1" value="D" class="mt-0.5"><span>A psychological fear of losing important digital documents.</span></label>
+                                </div>
+                                <div id="p1_q1_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                            </div>
+                            <!-- Q2 -->
+                            <div class="space-y-2 border-b border-slate-100 pb-4">
+                                <p class="text-xs font-semibold text-slate-800">2. In the computer experiment, what did the participants whose data was saved prioritize remembering?</p>
+                                <div class="space-y-1.5 text-xs text-slate-700">
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q2" value="A" class="mt-0.5"><span>The actual trivia facts they were asked to type.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q2" value="B" class="mt-0.5"><span>Where the information was stored, such as the specific computer folder.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q2" value="C" class="mt-0.5"><span>The names of the researchers conducting the study.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q2" value="D" class="mt-0.5"><span>The exact time it took them to type the information.</span></label>
+                                </div>
+                                <div id="p1_q2_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                            </div>
+                            <!-- Q3 -->
+                            <div class="space-y-2 border-b border-slate-100 pb-4">
+                                <p class="text-xs font-semibold text-slate-800">3. According to the lecture, what is necessary for true learning to occur?</p>
+                                <div class="space-y-1.5 text-xs text-slate-700">
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q3" value="A" class="mt-0.5"><span>Reading the same online article multiple times a day.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q3" value="B" class="mt-0.5"><span>Transferring information from short-term working memory into long-term memory.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q3" value="C" class="mt-0.5"><span>Relying completely on digital devices to store complex facts.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q3" value="D" class="mt-0.5"><span>Working in groups to discuss internet search results.</span></label>
+                                </div>
+                                <div id="p1_q3_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                            </div>
+                            <!-- Q4 -->
+                            <div class="space-y-2 border-b border-slate-100 pb-4">
+                                <p class="text-xs font-semibold text-slate-800">4. What is the consequence of the "superficial processing" caused by digital devices?</p>
+                                <div class="space-y-1.5 text-xs text-slate-700">
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q4" value="A" class="mt-0.5"><span>It prevents the critical transfer of knowledge to long-term memory.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q4" value="B" class="mt-0.5"><span>It increases the physical size of our short-term memory capacity.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q4" value="C" class="mt-0.5"><span>It allows students to read textbooks much faster.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q4" value="D" class="mt-0.5"><span>It completely stops the brain from processing any new information.</span></label>
+                                </div>
+                                <div id="p1_q4_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                            </div>
+                            <!-- Q5 -->
+                            <div class="space-y-2 pb-2">
+                                <p class="text-xs font-semibold text-slate-800">5. What positive view do some neurologists hold regarding the Google effect?</p>
+                                <div class="space-y-1.5 text-xs text-slate-700">
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q5" value="A" class="mt-0.5"><span>It will eventually eliminate the need for traditional schools.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q5" value="B" class="mt-0.5"><span>It improves our eyesight and hand-eye coordination.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q5" value="C" class="mt-0.5"><span>It makes humans much more social and outgoing in real life.</span></label>
+                                    <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p1_q5" value="D" class="mt-0.5"><span>It frees up our cognitive space for complex problem-solving and critical thinking.</span></label>
+                                </div>
+                                <div id="p1_q5_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PART 2 SECTION (While-Listening) -->
+            <div id="section-part2" class="hidden space-y-6">
+                <!-- Audio Player -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                    <div class="flex flex-wrap justify-between items-center gap-2 border-b border-slate-100 pb-4">
+                        <div>
+                            <span class="text-xs font-semibold text-teal-600 uppercase tracking-wider">Part 2 - Lecture 2</span>
+                            <h2 class="text-xl font-bold text-slate-800">The Deceptive Practice of "Greenwashing"</h2>
+                            <p class="text-xs text-slate-500 mt-1">İş Ahlakı (Business Ethics) & Pazarlama | While-Listening Mode</p>
+                        </div>
+                        <div class="flex items-center gap-2 bg-slate-100 p-1.5 rounded-lg border border-slate-200">
+                            <span class="text-xs text-slate-500 font-medium pl-2">Okuma Hızı:</span>
+                            <button onclick="setSpeed(0.85)" class="speed-btn px-2 py-1 text-xs font-semibold rounded bg-white shadow-sm text-slate-700">0.85x</button>
+                            <button onclick="setSpeed(1.0)" class="speed-btn px-2 py-1 text-xs font-semibold rounded bg-teal-600 text-white shadow-sm">1.0x</button>
+                            <button onclick="setSpeed(1.15)" class="speed-btn px-2 py-1 text-xs font-semibold rounded bg-white shadow-sm text-slate-700">1.15x</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900 rounded-xl p-4 text-white flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center space-x-3 w-full md:w-auto">
+                            <button id="p2-play-btn" onclick="toggleAudio('part2')" class="w-12 h-12 bg-teal-400 hover:bg-teal-300 text-slate-950 rounded-full flex items-center justify-center font-bold shadow-lg transition-transform active:scale-95">
+                                <i class="fa-solid fa-play text-lg ml-0.5" id="p2-play-icon"></i>
+                            </button>
+                            <div>
+                                <div class="text-sm font-semibold" id="p2-audio-status">Dinlemeyi Başlat</div>
+                                <div class="text-xs text-slate-300" id="p2-listen-count">Dinleme Hakkı: 1 / 2</div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/2 space-y-1">
+                            <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                                <div id="p2-progress" class="bg-teal-400 h-2 w-0 transition-all duration-300"></div>
+                            </div>
+                        </div>
+                        <button onclick="toggleTranscript('p2-transcript')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-100 px-3 py-2 rounded-lg transition-colors border border-slate-700 flex items-center gap-1.5">
+                            <i class="fa-solid fa-file-lines"></i>
+                            <span>Metni Göster</span>
+                        </button>
+                    </div>
+
+                    <!-- Transcript -->
+                    <div id="p2-transcript" class="hidden bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs text-slate-700 leading-relaxed max-h-60 overflow-y-auto custom-scrollbar font-mono">
+                        <div class="font-bold text-teal-900 mb-2">LECTURE SCRIPT (Part 2):</div>
+                        <p id="p2-script-text">
+                            Good morning. In our business ethics course today, we are going to tackle a deceptive marketing practice known as 'greenwashing.' Greenwashing occurs when a company spends more time and money marketing itself as environmentally friendly than actually minimizing its environmental impact. It is essentially a public relations stunt designed to capitalize on the growing consumer demand for sustainable products.<br><br>
+                            One of the most common greenwashing tactics is the use of vague terminology. Companies frequently plaster words like 'all-natural,' 'earth-friendly,' or 'eco-safe' on their packaging. The problem is that these terms are largely unregulated by the government. Because they have no strict legal definition, any company can use them without facing legal penalties.<br><br>
+                            Another tactic is the use of misleading visual imagery. Simply changing a product's packaging to feature green leaves, earth tones, or pictures of happy animals can trick the consumer's subconscious into believing the product is organic or sustainable, even if it is filled with harsh chemicals.<br><br>
+                            A more complex strategy is called the 'hidden trade-off.' This happens when a brand highlights one single environmentally positive attribute while completely ignoring the severe ecological damage caused by the rest of its production process. For example, a fast-food chain might proudly announce they have switched to paper straws, while completely ignoring the massive deforestation and carbon emissions caused by their beef supply chain.<br><br>
+                            Ultimately, the greatest danger of greenwashing is that it creates widespread consumer skepticism. When people realize they have been deceived, they lose trust in all eco-friendly claims. This financially harms the genuinely sustainable companies that are trying to make a real difference, as consumers can no longer tell who is telling the truth.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- While-Listening Questions -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-6">
+                    <div class="border-b border-slate-100 pb-3 flex justify-between items-center">
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
+                                <i class="fa-solid fa-list-check text-teal-600"></i>
+                                <span>While-Listening Questions</span>
+                            </h3>
+                        </div>
+                    </div>
+
+                    <form id="p2-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Q1 -->
+                        <div class="space-y-2 border-b md:border-b-0 md:border-r border-slate-100 pb-4 md:pr-4">
+                            <p class="text-xs font-semibold text-slate-800">1. How is "greenwashing" defined in the lecture?</p>
+                            <div class="space-y-1.5 text-xs text-slate-700">
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q1" value="A" class="mt-0.5"><span>A cleaning process used by factories to remove toxic chemicals from water.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q1" value="B" class="mt-0.5"><span>When a company spends more on marketing itself as eco-friendly than on actual environmental efforts.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q1" value="C" class="mt-0.5"><span>A government program designed to reward sustainable businesses.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q1" value="D" class="mt-0.5"><span>The process of recycling paper and plastic materials within an office.</span></label>
+                            </div>
+                            <div id="p2_q1_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                        </div>
+                        <!-- Q2 -->
+                        <div class="space-y-2 border-b border-slate-100 pb-4">
+                            <p class="text-xs font-semibold text-slate-800">2. Why are terms like "all-natural" or "eco-safe" considered problematic?</p>
+                            <div class="space-y-1.5 text-xs text-slate-700">
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q2" value="A" class="mt-0.5"><span>Because they are too expensive to print on packaging.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q2" value="B" class="mt-0.5"><span>Because consumers do not understand what they mean.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q2" value="C" class="mt-0.5"><span>Because they lack strict legal definitions and are unregulated by the government.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q2" value="D" class="mt-0.5"><span>Because they can only be used by agricultural companies.</span></label>
+                            </div>
+                            <div id="p2_q2_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                        </div>
+                        <!-- Q3 -->
+                        <div class="space-y-2 border-b md:border-b-0 md:border-r border-slate-100 pb-4 md:pr-4">
+                            <p class="text-xs font-semibold text-slate-800">3. How do companies use misleading visual imagery to trick consumers?</p>
+                            <div class="space-y-1.5 text-xs text-slate-700">
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q3" value="A" class="mt-0.5"><span>By making the packaging entirely transparent.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q3" value="B" class="mt-0.5"><span>By featuring green leaves and earth tones to subconsciously suggest the product is organic.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q3" value="C" class="mt-0.5"><span>By printing fake government certification logos on the boxes.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q3" value="D" class="mt-0.5"><span>By removing all text and labels from their products.</span></label>
+                            </div>
+                            <div id="p2_q3_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                        </div>
+                        <!-- Q4 -->
+                        <div class="space-y-2 border-b border-slate-100 pb-4">
+                            <p class="text-xs font-semibold text-slate-800">4. What describes the "hidden trade-off" strategy used by some brands?</p>
+                            <div class="space-y-1.5 text-xs text-slate-700">
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q4" value="A" class="mt-0.5"><span>Trading toxic chemicals for slightly less toxic alternatives secretly.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q4" value="B" class="mt-0.5"><span>Highlighting one small green initiative while ignoring massive ecological damage elsewhere.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q4" value="C" class="mt-0.5"><span>Offering a discount to customers who return used packaging to the store.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q4" value="D" class="mt-0.5"><span>Refusing to publish any environmental reports to hide their carbon footprint.</span></label>
+                            </div>
+                            <div id="p2_q4_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                        </div>
+                        <!-- Q5 -->
+                        <div class="space-y-2 col-span-1 md:col-span-2">
+                            <p class="text-xs font-semibold text-slate-800">5. What is mentioned as the greatest danger or ultimate consequence of greenwashing?</p>
+                            <div class="space-y-1.5 text-xs text-slate-700 grid grid-cols-1 md:grid-cols-2 gap-2">
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q5" value="A" class="mt-0.5"><span>It forces the government to shut down the manufacturing industry.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q5" value="B" class="mt-0.5"><span>It causes a global shortage of green dye and packaging materials.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q5" value="C" class="mt-0.5"><span>It creates consumer skepticism, which financially harms genuinely sustainable companies.</span></label>
+                                <label class="flex items-start gap-2 p-2 rounded hover:bg-slate-50 cursor-pointer"><input type="radio" name="p2_q5" value="D" class="mt-0.5"><span>It increases the overall price of fast-food products worldwide.</span></label>
+                            </div>
+                            <div id="p2_q5_exp" class="hidden text-[11px] p-2 rounded mt-2"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- ACTION BAR -->
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div>
+                    <span class="text-xs text-slate-500">Tüm soruları tamamladığınızda sınavı sonlandırın:</span>
+                    <div id="status-message" class="text-xs font-semibold text-slate-700">Henüz sınav teslim edilmedi.</div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="resetExam()" class="px-4 py-2 text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">Sıfırla</button>
+                    <button onclick="finishExam()" class="px-6 py-2.5 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-md transition-all">Sınavı Bitir ve Değerlendir</button>
+                </div>
+            </div>
+
+            <!-- RESULT BOX -->
+            <div id="result-box" class="hidden bg-white p-6 rounded-xl shadow-lg border-2 border-indigo-500 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <h3 class="font-bold text-slate-800 text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-chart-line text-indigo-600"></i>
+                        <span>Sınav Sonucu ve Analiz</span>
+                    </h3>
+                    <span id="pass-status-badge" class="px-3 py-1 rounded-full text-xs font-bold">--</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                    <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100">
+                        <span class="text-xs text-indigo-600 font-semibold block">Part 1 Score</span>
+                        <span id="p1-score-disp" class="text-2xl font-black text-indigo-950">0 / 50</span>
+                    </div>
+                    <div class="bg-teal-50 p-4 rounded-xl border border-teal-100">
+                        <span class="text-xs text-teal-600 font-semibold block">Part 2 Score</span>
+                        <span id="p2-score-disp" class="text-2xl font-black text-teal-950">0 / 50</span>
+                    </div>
+                    <div class="bg-slate-100 p-4 rounded-xl border border-slate-200">
+                        <span class="text-xs text-slate-600 font-semibold block">Toplam Puan</span>
+                        <span id="total-score-disp" class="text-2xl font-black text-slate-900">0 / 100</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script>
+        let currentTab = 'part1';
+        let currentRate = 1.0;
+        let isPlaying = false;
+        let activeAudioPart = null;
+        let synth = window.speechSynthesis;
+        let utterance = null;
+
+        const p1Keys = {
+            p1_q1: { ans: 'C', exp: "Metinde 'tendency to quickly forget information that we know can be easily accessed online' olarak tanımlanmıştır." },
+            p1_q2: { ans: 'B', exp: "Metinde bilgisayar deneyinde verisi kaydedilen grubun 'prioritized remembering where to find the information... the specific folder' (bilginin nerede olduğunu hatırlamaya odaklandıkları) söylenmiştir." },
+            p1_q3: { ans: 'B', exp: "Metinde gerçek öğrenmenin gerçekleşmesi için 'transferring information from our short-term working memory into our long-term memory' (kısa süreliden uzun süreli hafızaya geçiş) gerektiği belirtilmiştir." },
+            p1_q4: { ans: 'A', exp: "Metinde yüzeysel işlemenin (superficial processing) bilginin uzun süreli hafızaya aktarımını engellediği ('critical transfer... rarely happens') açıklanmıştır." },
+            p1_q5: { ans: 'D', exp: "Bazı nörologların bunun olumlu bir şey olduğunu çünkü beynin 'freeing up our cognitive space for more complex problem-solving and critical thinking' (daha karmaşık problemler için yer açtığını) savunduğu belirtilmiştir." }
+        };
+
+        const p2Keys = {
+            p2_q1: { ans: 'B', exp: "Metinde Greenwashing kavramı 'spends more time and money marketing itself as environmentally friendly than actually minimizing its environmental impact' olarak açıklanmıştır." },
+            p2_q2: { ans: 'C', exp: "Metinde bu tarz kelimelerin 'largely unregulated by the government. Because they have no strict legal definition' (hükümet denetimi veya yasal bir tanımı olmadığı) için sorunlu olduğu belirtilmiştir." },
+            p2_q3: { ans: 'B', exp: "Metinde yanıltıcı görsel kullanımı 'feature green leaves, earth tones... to trick the consumer's subconscious' (tüketicinin bilinçaltını kandırmak için yeşil yaprak ve toprak tonları kullanmak) olarak anlatılmıştır." },
+            p2_q4: { ans: 'B', exp: "Metinde gizli takas (hidden trade-off) kavramı, örneğin fast-food şirketinin kağıt pipet kullanıp ormansızlaşmayı (deforestation) görmezden gelmesi gibi, bir detayı öne çıkarıp büyük hasarı gizlemek olarak açıklanmıştır." },
+            p2_q5: { ans: 'C', exp: "Metinde greenwashing'in en büyük tehlikesinin tüketici şüphesi (skepticism) yaratması olduğu ve bunun gerçekten çevreci olan dürüst şirketlere maddi zarar verdiği ('financially harms the genuinely sustainable companies') belirtilmiştir." }
+        };
+
+        function switchTab(tab) {
+            currentTab = tab;
+            stopAudio();
+            document.getElementById('tab-part1').className = tab === 'part1' ? 'w-full text-left p-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between bg-indigo-50 text-indigo-700 border border-indigo-200 shadow-sm' : 'w-full text-left p-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between text-slate-600 hover:bg-slate-100';
+            document.getElementById('tab-part2').className = tab === 'part2' ? 'w-full text-left p-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between bg-teal-50 text-teal-700 border border-teal-200 shadow-sm' : 'w-full text-left p-3 rounded-lg text-sm font-medium transition-all flex items-center justify-between text-slate-600 hover:bg-slate-100';
+            document.getElementById('section-part1').classList.toggle('hidden', tab !== 'part1');
+            document.getElementById('section-part2').classList.toggle('hidden', tab !== 'part2');
+        }
+
+        function setSpeed(speed) {
+            currentRate = speed;
+            document.querySelectorAll('.speed-btn').forEach(btn => {
+                if (btn.innerText === speed + 'x') {
+                    btn.classList.add(currentTab === 'part1' ? 'bg-indigo-600' : 'bg-teal-600', 'text-white');
+                    btn.classList.remove('bg-white', 'text-slate-700');
+                } else {
+                    btn.classList.remove('bg-indigo-600', 'bg-teal-600', 'text-white');
+                    btn.classList.add('bg-white', 'text-slate-700');
+                }
+            });
+            if (isPlaying && utterance) {
+                const part = activeAudioPart;
+                stopAudio();
+                toggleAudio(part);
+            }
+        }
+
+        function toggleAudio(part) {
+            if (isPlaying && activeAudioPart === part) { stopAudio(); return; }
+            stopAudio();
+            activeAudioPart = part;
+            isPlaying = true;
+            const textId = part === 'part1' ? 'p1-script-text' : 'p2-script-text';
+            utterance = new SpeechSynthesisUtterance(document.getElementById(textId).innerText);
+            utterance.rate = currentRate;
+            utterance.lang = 'en-US';
+
+            document.getElementById(part === 'part1' ? 'p1-play-icon' : 'p2-play-icon').className = 'fa-solid fa-pause text-lg';
+            document.getElementById(part === 'part1' ? 'p1-audio-status' : 'p2-audio-status').innerText = 'Oynatılıyor...';
+
+            let progressInterval = setInterval(() => {
+                if (!isPlaying) { clearInterval(progressInterval); return; }
+                const prog = document.getElementById(part === 'part1' ? 'p1-progress' : 'p2-progress');
+                let currWidth = parseFloat(prog.style.width || '0');
+                if (currWidth < 100) prog.style.width = (currWidth + 0.6) + '%';
+            }, 1000);
+
+            utterance.onend = function() {
+                stopAudio();
+                document.getElementById(part === 'part1' ? 'p1-progress' : 'p2-progress').style.width = '100%';
+                document.getElementById(part === 'part1' ? 'p1-audio-status' : 'p2-audio-status').innerText = 'Tamamlandı';
+            };
+            synth.speak(utterance);
+        }
+
+        function stopAudio() {
+            if (synth.speaking) synth.cancel();
+            isPlaying = false;
+            document.getElementById('p1-play-icon').className = 'fa-solid fa-play text-lg ml-0.5';
+            document.getElementById('p2-play-icon').className = 'fa-solid fa-play text-lg ml-0.5';
+            document.getElementById('p1-audio-status').innerText = 'Dinlemeyi Başlat';
+            document.getElementById('p2-audio-status').innerText = 'Dinlemeyi Başlat';
+            activeAudioPart = null;
+        }
+
+        function toggleTranscript(id) { document.getElementById(id).classList.toggle('hidden'); }
+
+        function finishExam() {
+            stopAudio();
+            let p1Correct = 0, p2Correct = 0;
+
+            const evaluate = (keys, partPrefix) => {
+                let correctCount = 0;
+                for (let q in keys) {
+                    const selected = document.querySelector(`input[name="${q}"]:checked`);
+                    const expEl = document.getElementById(`${q}_exp`);
+                    expEl.classList.remove('hidden', 'bg-emerald-50', 'bg-rose-50', 'text-emerald-800', 'text-rose-800');
+                    if (selected && selected.value === keys[q].ans) {
+                        correctCount++;
+                        expEl.classList.add('bg-emerald-50', 'text-emerald-800');
+                        expEl.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600"></i> <strong>Doğru!</strong> ${keys[q].exp}`;
+                    } else {
+                        expEl.classList.add('bg-rose-50', 'text-rose-800');
+                        expEl.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-600"></i> <strong>Yanlış! Cevap: ${keys[q].ans}.</strong> ${keys[q].exp}`;
+                    }
+                }
+                return correctCount;
+            };
+
+            p1Correct = evaluate(p1Keys, 'p1');
+            p2Correct = evaluate(p2Keys, 'p2');
+
+            const totalScore = (p1Correct * 10) + (p2Correct * 10);
+            document.getElementById('p1-score-disp').innerText = `${p1Correct * 10} / 50`;
+            document.getElementById('p2-score-disp').innerText = `${p2Correct * 10} / 50`;
+            document.getElementById('total-score-disp').innerText = `${totalScore} / 100`;
+
+            const resultBox = document.getElementById('result-box');
+            const badge = document.getElementById('pass-status-badge');
+            resultBox.classList.remove('hidden');
+
+            if (totalScore >= 60) {
+                badge.className = 'px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300';
+                badge.innerText = 'GEÇTİNİZ! 🎉';
+            } else {
+                badge.className = 'px-3 py-1 rounded-full text-xs font-bold bg-rose-100 text-rose-800 border border-rose-300';
+                badge.innerText = 'KALDINIZ (60 Altı)';
+            }
+            document.getElementById('status-message').innerText = `Sınav tamamlandı. Toplam Puan: ${totalScore}/100`;
+            resultBox.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function resetExam() {
+            stopAudio();
+            document.getElementById('p1-form').reset();
+            document.getElementById('p2-form').reset();
+            document.getElementById('p1-notes').value = '';
+            document.querySelectorAll('[id$="_exp"]').forEach(el => el.classList.add('hidden'));
+            document.getElementById('p1-progress').style.width = '0%';
+            document.getElementById('p2-progress').style.width = '0%';
+            document.getElementById('result-box').classList.add('hidden');
+            document.getElementById('status-message').innerText = 'Henüz sınav teslim edilmedi.';
+        }
+    </script>
+</body>
+</html>
